@@ -28,7 +28,7 @@
                 <h4 class="text-uppercase font-bold m-b-0">Sign In</h4>
             </div>
             <div class="p-20">
-                <form class="form-horizontal m-t-20" method="post" action="<?php echo base_url('Admin_login/proses');?>">
+                <form class="form-horizontal m-t-20" method="post" action="<?php echo base_url('Login/proses');?>">
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" required=""  name="username" placeholder="Username">
