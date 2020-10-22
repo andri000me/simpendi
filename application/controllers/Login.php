@@ -15,7 +15,7 @@ class Login extends CI_Controller
     {
         $cookie = get_cookie($this->cookie);
         if ($this->session->userdata('log_in')) {
-            $this->role = $this->session->userdata('loh_in')['role'];
+            $this->role = $this->session->userdata('log_in')['role'];
             redirect($this->role);
         } elseif ($cookie <> '') {
             $this->load->model('M_login');

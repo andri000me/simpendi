@@ -244,7 +244,7 @@ class Kamus extends CI_Controller
             $delete = $this->M_Universal->delete(array("id_adm" => $id ), "admin");
             ($delete) ? $this->notifikasi->suksesHapus() : $this->notifikasi->gagalHapus();
             redirect(base_url('Panel/adm'), 'refresh');
-        } } elseif ($this->u3 =='lihat') {
+        } elseif ($this->u3 =='lihat') {
             $id = $this->input->get("id", true);
             $data = $this->M_admin->getDetail($id);
             $ow = explode("-", $data->id_cabor_kat);

@@ -21,7 +21,7 @@
     <div class="clearfix"></div>
     <div class="wrapper-page">
         <div class="text-center">
-            <a href="index.html" class="logo"><span>nama<span class="ml-2">aplikasi</span></span></a>
+            <a href="index.html" class="logo"><span>SIMPENDI _<span class="ml-2">PHB</span></span></a>
         </div>
         <div class="m-t-40 card-box">
             <div class="text-center">
@@ -29,6 +29,8 @@
             </div>
             <div class="p-20">
                 <form class="form-horizontal m-t-20" method="post" action="<?php echo base_url('Login/proses');?>">
+                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
+                                            value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                     <div class="form-group">
                         <div class="col-xs-12">
                             <input class="form-control" type="text" required=""  name="username" placeholder="Username">
