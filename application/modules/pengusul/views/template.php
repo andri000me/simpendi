@@ -37,6 +37,9 @@
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+    <!-- form Uploads -->
+    <link href="<?php echo base_url()?>assets/adminto/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
+
     <script
         src="<?php echo base_url()?>assets/adminto/assets/js/modernizr.min.js">
     </script>
@@ -130,7 +133,7 @@
                     <ul>
                         <li class="text-muted menu-title">Navigation</li>
                         <li>
-                            <a href="<?php echo base_url('operator');?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                            <a href="<?php echo base_url($this->role);?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-search"></i><span>Penelitian </span> <span class="menu-arrow"></span></a>

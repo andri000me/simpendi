@@ -21,6 +21,9 @@ class Penelitian extends CI_Controller
         $this->u6		= $this->uri->segment(6);
         $this->load->model('M_Universal');
         $this->load->model('M_tahun');
+        $this->load->model('M_user');
+        $this->load->model('M_hibah');
+        $this->load->model('M_anggota');
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
@@ -33,10 +36,12 @@ class Penelitian extends CI_Controller
     public function index()
     {
         $tahun = $this->M_tahun->all();
+        $anggota = $this->M_user->anggotas();
         $params = array(
-            'title'	=> 'Usulan Penelitian',
-            'tahuns'=> $tahun,
-            'page'	=> 'penelitian/ub');
+            'title'	    => 'Usulan Penelitian',
+            'anggotas'  => $anggota,
+            'tahuns'    => $tahun,
+            'page'	    => 'penelitian/ub');
         $this->template($params);
     }
 
@@ -44,49 +49,100 @@ class Penelitian extends CI_Controller
     {
         $config_rules = array(
             array(
-                'field' => 'nama',
-                'label' => 'Nama',
-                'rules' => 'required|min_length[6]'
+                'field' => 'tahun',
+                'label' => 'Tahun',
+                'rules' => 'required'
             ),
 
             array(
-                'field' => 'username',
-                'label' => 'Username',
-                'rules' => 'required|min_length[6]'
+                'field' => 'anggotas[]',
+                'label' => 'Anggota',
+                'rules' => 'required'
             ),
 
             array(
-                'field' => 'password',
-                'label' => 'Password',
-                'rules' => 'required|min_length[6]'
+                'field' => 'keilmuan',
+                'label' => 'Keilmuan',
+                'rules' => 'required'
 
             ),
 
             array(
-                'field' => 'password2',
-                'label' => 'Confirm Password',
-                'rules' => 'required|matches[password]'
+                'field' => 'nominal',
+                'label' => 'Nominal',
+                'rules' => 'required|numeric'
+
+            ),
+
+            array(
+                'field' => 'judul',
+                'label' => 'Judul',
+                'rules' => 'required'
+
+            ),
+
+            array(
+                'field' => 'luaran',
+                'label' => 'Luaran',
+                'rules' => 'required'
             )
         );
 
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
-            $data['name']	    =	$this->input->post('nama', true);
-            $data['username']	=	$this->input->post('username', true);
-            $data['role']	    =	$this->input->post('role', true);
-            $data['prodi']	    =	$this->input->post('prodi', true);
-            $pass           	=	$this->input->post('password', true);
-            $data['password']	=   password_hash($pass, PASSWORD_BCRYPT);
+            if ($_FILES['proposal']['size'] > 0) {
+                $config['upload_path']		= './upload/penelitian/proposal/';
+                $config['allowed_types']	= 'pdf';
+                $config['detect_mime']	  = true;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('proposal')) {
+                    $proposal 			= $this->upload->data();
+                    $data['proposal']	= $proposal['file_name'];
+                    $data['user_id']	=	$this->id;
+                    $data['prodi']	    =	$this->prodi;
+                    $data['kategori']	=	'penelitian';
+                    $data['judul']	    =	$this->input->post('judul', true);
+                    $data['tahun']	    =	$this->input->post('tahun', true);
+                    $data['nominal']	=	$this->input->post('nominal', true);
+                    $data['keilmuan']	=	$this->input->post('keilmuan', true);
+                    $data['luaran']	    =	$this->input->post('luaran', true);
+                    $data['status_p']	=	1;
 
-            if ($this->M_user->insert($data)) {
-                $this->notifikasi->suksesAdd();
+                    if ($this->M_hibah->insert($data)) {
+                        $anggotas = $this->input->post('anggotas', true);
+                        foreach ($anggotas as $anggota){
+                            $item[] = [
+                                'hibah_id' => $this->db->insert_id(),
+                                'user_id'  => $anggota
+                            ];
+                        }
+                        if ($this->M_anggota->insert($item)) {
+                            $this->notifikasi->suksesAdd('dengan anggota');
 
-                $this->index();
+                            $this->index();
+                        }
+                        $this->notifikasi->suksesAdd('tanpa anggota');
+
+                        $this->index();
+                    } else {
+                        $this->notifikasi->gagalAdd();
+
+                        $this->index();
+                    }
+                    
+                } else {
+                    $this->notifikasi->gagalAdd('proposal gagal upload');
+
+                    $this->index();
+                }
             } else {
-                $this->notifikasi->gagalAdd();
+                $this->notifikasi->gagalAdd('proposal kosong');
 
                 $this->index();
             }
+
+            
         } else {
             $this->notifikasi->valdasiError(validation_errors());
 
