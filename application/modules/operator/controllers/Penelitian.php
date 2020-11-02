@@ -115,8 +115,6 @@ class Penelitian extends CI_Controller
 
     public function download()
     {
-        $lokasi = './upload/penelitian/proposal/';
-        $isi = 'Download proposal';
         $nama_file = $this->input->get('file', true);
         force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
     }
