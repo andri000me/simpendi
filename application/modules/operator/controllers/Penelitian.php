@@ -29,17 +29,98 @@ class Penelitian extends CI_Controller
         } else {
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
-        $this->load->helper(array('file', 'resize'));
+        $this->load->helper(array('file', 'resize', 'download'));
     }
     public function index()
     {
+        $reviewer = $this->M_user->reviewers();
         $hibahs = $this->M_hibah->usulanBaru();
         $params = array(
             'title'	    => 'Usulan Baru',
+            'reviewers' => $reviewer,
             'hibahs'    => $hibahs,
             'page'	    => 'penelitian/ub');
         $this->template($params);
     }
+
+    public function set_reviewer1()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'reviewer1',
+                'label' => 'Reviewer 1',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            $data['reviewer1_id']	    =	$this->input->post('reviewer1', true);
+            $id                         = $this->input->post('id', true);
+
+            if ($this->M_hibah->update($data, $id)) {
+                $this->notifikasi->suksesEdit();
+
+                $this->index();
+            } else {
+                $this->notifikasi->gagalEdit();
+
+                $this->index();
+            }
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->index();
+        }
+    }
+
+    public function set_reviewer2()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'reviewer2',
+                'label' => 'Reviewer 2',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            $data['reviewer2_id']	    = $this->input->post('reviewer2', true);
+            $id                         = $this->input->post('id', true);
+
+            if ($this->M_hibah->update($data, $id)) {
+                $this->notifikasi->suksesEdit();
+
+                $this->index();
+            } else {
+                $this->notifikasi->gagalEdit();
+
+                $this->index();
+            }
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->index();
+        }
+    }
+
+    public function download()
+    {
+        $lokasi = './upload/penelitian/proposal/';
+        $isi = 'Download proposal';
+        $nama_file = $this->input->get('file', true);
+        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+    }
+
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {

@@ -14,6 +14,13 @@ class M_hibah extends CI_Model
 		$this->db->where('status_p', 1);
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;
+	}
+	
+	public function update($data, $id)
+    {
+        $this->db->where('id', $id);
+        $update = $this->db->update('hibahs', $data);
+        return ($update) ? true : false;
     }
 	
 	// custom enkripsi
