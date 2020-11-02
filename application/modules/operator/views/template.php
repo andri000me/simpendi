@@ -133,16 +133,16 @@
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-search"></i><span>Penelitian </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('operator/Penelitian');?>">Usulan Baru</a></li>
+                                <li><a href="<?php echo base_url('operator/Penelitian/');?>">Usulan Baru</a></li>
                                 <li><a href="<?php echo base_url('operator/Penelitian/pu');?>">Perbaikan Usulan</a></li>
                                 <li><a href="<?php echo base_url('operator/Penelitian/lp');?>">Laporan Pendahuluan</a></li>
-                                <li><a href="<?php echo base_url('operator/User/pl');?>">Perbaikan Laporan</a></li>
+                                <li><a href="<?php echo base_url('operator/Penelitian/pl');?>">Perbaikan Laporan</a></li>
                             </ul>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-spin fa-spinner"></i><span>Pengabdian </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('operator/Pengabdian');?>">Usulan Baru</a></li>
+                                <li><a href="<?php echo base_url('operator/Pengabdian/');?>">Usulan Baru</a></li>
                                 <li><a href="<?php echo base_url('operator/Pengabdian/pu');?>">Perbaikan Usulan</a></li>
                                 <li><a href="<?php echo base_url('operator/Pengabdian/lp');?>">Laporan Pendahuluan</a></li>
                                 <li><a href="<?php echo base_url('operator/Pengabdian/pl');?>">Perbaikan Laporan</a></li>

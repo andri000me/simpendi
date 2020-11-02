@@ -36,7 +36,7 @@ class Penelitian extends CI_Controller
     public function index()
     {
         $tahun = $this->M_tahun->all();
-        $anggota = $this->M_user->anggotas();
+        $anggota = $this->M_user->anggotas($this->id);
         $params = array(
             'title'	    => 'Usulan Penelitian',
             'anggotas'  => $anggota,
