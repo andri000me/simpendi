@@ -26,7 +26,8 @@
 
 
                                         <tbody>
-                                        <?php foreach ($hibahs as $hibah) { ?>
+                                        <?php if ($hibahs != ''){
+                                        foreach ($hibahs as $hibah) { ?>
                                         <tr>
                                             <td><a href="<?php echo base_url('operator/Penelitian/download?file='.$hibah->proposal);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-pdf-o"></i></a>
@@ -135,7 +136,7 @@
                                                 </div>
                                                 
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }?>
                                         </tbody>
                                     </table>
                                 </div>
