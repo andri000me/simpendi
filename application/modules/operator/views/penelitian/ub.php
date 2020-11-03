@@ -14,7 +14,7 @@
                                             <th>Download</th>
                                             <th>Judul</th>
                                             <th>Ketua</th>
-                                            <th>NIDN / NUPY</th>
+                                            <th>NIDN / NUPN</th>
                                             <th>Anggota</th>
                                             <th>Prodi</th>
                                             <th>Nominal</th>
