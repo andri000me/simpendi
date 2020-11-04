@@ -42,6 +42,54 @@ class Review extends CI_Controller
             'page'	    => 'ub');
         $this->template($params);
     }
+
+    public function penilaian()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'a',
+                'label' => 'a',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'b',
+                'label' => 'b',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'c',
+                'label' => 'c',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'd',
+                'label' => 'd',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'e',
+                'label' => 'e',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'f',
+                'label' => 'f',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'g',
+                'label' => 'g',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->index();
+    }
+
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {

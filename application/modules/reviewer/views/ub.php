@@ -54,18 +54,69 @@
                                                     <button type="button" class="close" onclick="Custombox.close();">
                                                         <span>&times;</span><span class="sr-only">Close</span>
                                                     </button>
-                                                    <h4 class="custom-modal-title">Set Reviewer</h4>
+                                                    <h4 class="custom-modal-title">Review</h4>
                                                     <div class="custom-modal-text">
                                                         <form action="<?php echo base_url('reviewer/Review/review');?>" data-parsley-validate novalidate method="post">
                                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                                         value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                         <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
 
-                                                            
-                                                            <div class="form-group text-left">
-                                                                <table>
-                                                                <tbody></tbody>
-                                                                </table>
+                                                        <label class="col-sm-12 col-form-label text-left"><strong>Skor : 1 - 7</strong>
+                                                            <br>(1 = buruk, 2 = sangat kurang, 3 = kurang, 5 = cukup, 6 = baik, 7 = sangat baik)
+                                                        </label>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-6 col-form-label text-left"><strong>Perumusan Masalah :</strong>
+                                                                    <br>a. Ketajaman perumusan Masalah
+                                                                    <br>b. Tujuan penelitian/pkm
+                                                                </label>
+                                                                <label class="col-sm-3 col-form-label"><br>15%</label>
+                                                                <div class="col-sm-3"><br>
+                                                                    <input type="number" class="form-control" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-6 col-form-label text-left"><strong>Peluang luaran :</strong>
+                                                                    <br>a. Publikasi ilmiah
+                                                                    <br><br>b. Pengembangan iptek-sosbud
+                                                                    <br><br>c. Pengayaan bahan ajar/ HKI
+                                                                </label>
+                                                                <label class="col-sm-3 col-form-label"><br>20%<br><br>15%<br><br>10%</label>
+                                                                <div class="col-sm-3"><br>
+                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-6 col-form-label text-left"><strong>Motode penelitian/pkm :</strong>
+                                                                    <br>a. Ketepatan dan kesesuaian metode yang digunakan
+                                                                </label>
+                                                                <label class="col-sm-3 col-form-label"><br>15%</label>
+                                                                <div class="col-sm-3"><br>
+                                                                    <input type="number" class="form-control" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-6 col-form-label text-left"><strong>Tinjauan pustaka :</strong>
+                                                                    <br>a. Relevansi
+                                                                    <br>b. Kemutakhiran
+                                                                    <br>c. Penyusunan daftar pustaka
+                                                                </label>
+                                                                <label class="col-sm-3 col-form-label"><br>15%</label>
+                                                                <div class="col-sm-3"><br>
+                                                                    <input type="number" class="form-control" required/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-6 col-form-label text-left"><strong>Kelayakan penelitian/pkm :</strong>
+                                                                    <br>a. Kesesuaian waktu
+                                                                    <br>b. Kesesuaian biaya
+                                                                    <br>c. Kesesuaian personalia
+                                                                </label>
+                                                                <label class="col-sm-3 col-form-label"><br>10%</label>
+                                                                <div class="col-sm-3"><br>
+                                                                    <input type="number" class="form-control" required/>
+                                                                </div>
                                                             </div>
 
                                                             <div class="form-group text-right m-b-0">
