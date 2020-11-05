@@ -56,7 +56,7 @@
                                                     </button>
                                                     <h4 class="custom-modal-title">Review</h4>
                                                     <div class="custom-modal-text">
-                                                        <form action="<?php echo base_url('reviewer/Review/penilaian');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                                                        <form method="post" action="<?php echo base_url('reviewer/Review/penilaian');?>" data-parsley-validate novalidate enctype="multipart/form-data">
                                                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                                             value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                             <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
@@ -120,10 +120,11 @@
                                                             </div>
                                                             <label for="comment" class="col-sm-12 col-form-label text-left"><strong>Comment</strong></label>
                                                             <div class="form-group row">
-                                                                <textarea class="col-sm-9 float-left" name="comment" rows="7"></textarea>
-                                                                <div class="col-3 float-right">
-                                                                <h4 class="header-title m-t-0 m-b-30">Proposal</h4>
-                                                                <input type="file" class="dropify" data-height="100" name="proposal"/>
+                                                                <textarea class="col-sm-12 float-left" name="comment" rows="6"></textarea>
+                                                                <div class="col-12 text-left">
+                                                                <br>
+                                                                <h4 class="header-title ">Proposal hasil review</h4>
+                                                                <input type="file" data-height="100" name="proposal"/>
                                                                 </div>
                                                             </div>
 
@@ -165,19 +166,20 @@
 <!-- file uploads js -->
 <script src="<?php echo base_url() ?>assets/adminto/assets/plugins/fileuploads/js/dropify.min.js"></script>
 <script type="text/javascript">
+            // Dropify
+            $('.dropify').dropify({
+                     messages: {
+                    'default': 'Drag and drop a file here or click',
+                    'replace': 'Drag and drop or click to replace',
+                    'remove': 'Remove',
+                    'error': 'Ooops, something wrong appended.'
+                },
+                error: {
+                    'fileSize': 'The file size is too big (1M max).'
+                }
+            });
+
             $(document).ready(function () {
-                // Dropify
-                $('.dropify').dropify({
-                            messages: {
-                                'default': 'Drag and drop a file here or click',
-                                'replace': 'Drag and drop or click to replace',
-                                'remove': 'Remove',
-                                'error': 'Ooops, something wrong appended.'
-                            },
-                            error: {
-                                'fileSize': 'The file size is too big (1M max).'
-                            }
-                        });
 
                 // Default Datatable
                 $('#datatable').DataTable();

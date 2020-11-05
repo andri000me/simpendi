@@ -119,10 +119,11 @@ class Review extends CI_Controller
                     $hibah = $this->M_hibah->getOne($id);
                     if ($hibah->reviewer1_id == $this->id){
                         $data['nilai1'] = $total;
+                        $data['proposal_review1'] = $proposal['file_name'];
                     } else if ($hibah->reviewer2_id == $this->id){
                         $data['nilai2'] = $total;
+                        $data['proposal_review2'] = $proposal['file_name'];
                     }
-                    $data['proposal_review'] = $proposal['file_name'];
                     $data['comment'] = $hibah->comment.' '.$comment.'.<br>';
                     if ($this->M_hibah->update($data, $id)) {
                         $this->notifikasi->suksesEdit('nilai telah berhasil diberikan');
