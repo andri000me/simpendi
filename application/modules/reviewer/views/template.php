@@ -35,6 +35,8 @@
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet" type="text/css" />
     <!-- Sweet Alert css -->
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <!-- form Uploads -->
+    <link href="<?php echo base_url()?>assets/adminto/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
     <script
         src="<?php echo base_url()?>assets/adminto/assets/js/modernizr.min.js">
     </script>
@@ -134,7 +136,7 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-spin fa-spinner"></i><span>Review </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?php echo base_url('reviewer/Review/');?>">Usulan Baru</a></li>
-                                <li><a href="<?php echo base_url('reviewer/Review/hr');?>">Hasil Review</a></li>
+                                <li><a href="<?php echo base_url('reviewer/Review/hr');?>">Sudah Perbaikan</a></li>
                                 <li><a href="<?php echo base_url('reviewer/Review/rr');?>">Riwayat Review</a></li>
                             </ul>
                         </li>

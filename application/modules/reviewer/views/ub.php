@@ -56,14 +56,14 @@
                                                     </button>
                                                     <h4 class="custom-modal-title">Review</h4>
                                                     <div class="custom-modal-text">
-                                                        <form action="<?php echo base_url('reviewer/Review/review');?>" data-parsley-validate novalidate method="post">
-                                                        <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
-                                                        value="<?=$this->security->get_csrf_hash();?>" style="display: none">
-                                                        <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
+                                                        <form action="<?php echo base_url('reviewer/Review/penilaian');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                                                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
+                                                            value="<?=$this->security->get_csrf_hash();?>" style="display: none">
+                                                            <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
 
-                                                        <label class="col-sm-12 col-form-label text-left"><strong>Skor : 1 - 7</strong>
-                                                            <br>(1 = buruk, 2 = sangat kurang, 3 = kurang, 5 = cukup, 6 = baik, 7 = sangat baik)
-                                                        </label>
+                                                            <label class="col-sm-12 col-form-label text-left"><strong>Skor : 1 - 7</strong>
+                                                                <br>(1 = buruk, 2 = sangat kurang, 3 = kurang, 5 = cukup, 6 = baik, 7 = sangat baik)
+                                                            </label>
                                                             <div class="form-group row">
                                                                 <label class="col-sm-6 col-form-label text-left"><strong>Perumusan Masalah :</strong>
                                                                     <br>a. Ketajaman perumusan Masalah
@@ -71,7 +71,7 @@
                                                                 </label>
                                                                 <label class="col-sm-3 col-form-label"><br>15%</label>
                                                                 <div class="col-sm-3"><br>
-                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" name="a" required/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -82,9 +82,9 @@
                                                                 </label>
                                                                 <label class="col-sm-3 col-form-label"><br>20%<br><br>15%<br><br>10%</label>
                                                                 <div class="col-sm-3"><br>
-                                                                    <input type="number" class="form-control" required/>
-                                                                    <input type="number" class="form-control" required/>
-                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" name="b" required/>
+                                                                    <input type="number" class="form-control" name="c" required/>
+                                                                    <input type="number" class="form-control" name="d" required/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -93,7 +93,7 @@
                                                                 </label>
                                                                 <label class="col-sm-3 col-form-label"><br>15%</label>
                                                                 <div class="col-sm-3"><br>
-                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" name="e" required/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -104,7 +104,7 @@
                                                                 </label>
                                                                 <label class="col-sm-3 col-form-label"><br>15%</label>
                                                                 <div class="col-sm-3"><br>
-                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" name="f" required/>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
@@ -115,15 +115,23 @@
                                                                 </label>
                                                                 <label class="col-sm-3 col-form-label"><br>10%</label>
                                                                 <div class="col-sm-3"><br>
-                                                                    <input type="number" class="form-control" required/>
+                                                                    <input type="number" class="form-control" name="g" required/>
+                                                                </div>
+                                                            </div>
+                                                            <label for="comment" class="col-sm-12 col-form-label text-left"><strong>Comment</strong></label>
+                                                            <div class="form-group row">
+                                                                <textarea class="col-sm-9 float-left" name="comment" rows="7"></textarea>
+                                                                <div class="col-3 float-right">
+                                                                <h4 class="header-title m-t-0 m-b-30">Proposal</h4>
+                                                                <input type="file" class="dropify" data-height="100" name="proposal"/>
                                                                 </div>
                                                             </div>
 
                                                             <div class="form-group text-right m-b-0">
-                                                                <button class="btn btn-primary waves-effect waves-light" type="submit">
+                                                                <button class="btn btn-primary btn-rounded waves-effect waves-light" type="submit">
                                                                     Submit
                                                                 </button>
-                                                                <button type="reset" class="btn btn-secondary waves-effect waves-light m-l-5">
+                                                                <button type="reset" class="btn btn-secondary btn-rounded waves-effect waves-light m-l-5">
                                                                     Cancel
                                                                 </button>
                                                             </div>
@@ -154,8 +162,22 @@
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/vfs_fonts.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.html5.min.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.print.min.js"></script>
+<!-- file uploads js -->
+<script src="<?php echo base_url() ?>assets/adminto/assets/plugins/fileuploads/js/dropify.min.js"></script>
 <script type="text/javascript">
             $(document).ready(function () {
+                // Dropify
+                $('.dropify').dropify({
+                            messages: {
+                                'default': 'Drag and drop a file here or click',
+                                'replace': 'Drag and drop or click to replace',
+                                'remove': 'Remove',
+                                'error': 'Ooops, something wrong appended.'
+                            },
+                            error: {
+                                'fileSize': 'The file size is too big (1M max).'
+                            }
+                        });
 
                 // Default Datatable
                 $('#datatable').DataTable();

@@ -1,33 +1,33 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_hibah extends CI_Model
+class M_penilaian extends CI_Model
 {
     public function all()
     {
-        $data = $this->db->get('hibahs')->result();
+        $data = $this->db->get('penilaian')->result();
         return (count( (array)$data) > 0) ? $data : false;
-	}
-	
-    public function usulanBaru()
+    }
+    
+    public function insert($data)
     {
-		$this->db->where('status_p', 1);
-        $data = $this->db->get('hibahs')->result();
-        return (count( (array)$data) > 0) ? $data : false;
-	}
+        return ($this->db->insert('penilaian', $data)) ? true : false ;
+    }
 	
-	public function update($data, $id)
+	public function update($data, $hibah_id, $reviewer_id)
     {
-        $this->db->where('id', $id);
-        $update = $this->db->update('hibahs', $data);
+        $this->db->where('hibah_id', $hibah_id);
+        $this->db->where('reviewer_id', $reviewer_id);
+        $update = $this->db->update('penilaian', $data);
         return ($update) ? true : false;
 	}
 	
-	public function getOne($id)
+	public function cek($hibah_id, $reviewer_id)
 	{
-		$this->db->where('id', $id);
-		$data = $this->db->get('hibahs')->row();
-		return (count( (array)$data) >0) ? $data : false;
+		$this->db->where('hibah_id', $hibah_id);
+		$this->db->where('reviewer_id', $reviewer_id);
+		$data = $this->db->get('penilaian')->row();
+		return (count( (array)$data) >0) ? true : false;
 	}
 	
 	// custom enkripsi
