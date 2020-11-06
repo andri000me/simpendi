@@ -30,7 +30,7 @@ class Review extends CI_Controller
         } else {
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
-        $this->load->helper(array('file', 'resize'));
+        $this->load->helper(array('file', 'resize','download'));
         $this->load->library('form_validation');
     }
     public function index()
@@ -124,7 +124,7 @@ class Review extends CI_Controller
                         $data['nilai2'] = $total;
                         $data['proposal_review2'] = $proposal['file_name'];
                     }
-                    $data['comment'] = $hibah->comment.' '.$comment.'.<br>';
+                    $data['comment'] = $hibah->comment.' '.$this->name.' => '.$comment.'.<br>';
                     if ($this->M_hibah->update($data, $id)) {
                         $this->notifikasi->suksesEdit('nilai telah berhasil diberikan');
                         $nilai['hibah_id']    =  $id; 
@@ -166,6 +166,12 @@ class Review extends CI_Controller
 
             $this->index();
         }
+    }
+
+    public function download()
+    {
+        $nama_file = $this->input->get('file', true);
+        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
     }
 
     public function template($params = array())

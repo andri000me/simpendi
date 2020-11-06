@@ -1,36 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class M_hibah extends CI_Model
+class M_anggota extends CI_Model
 {
     public function all()
     {
-        $data = $this->db->get('hibahs')->result();
+        $data = $this->db->get('anggotas')->result();
         return (count( (array)$data) > 0) ? $data : false;
 	}
 	
-    public function usulanBaru()
-    {
-		$this->db->where('reviewer1_id', $this->id);
-		$this->db->where('status_p', 1);
-		$this->db->or_where('reviewer2_id', $this->id);
-		$this->db->where('status_p', 1);
-        $data = $this->db->get('hibahs')->result();
-        return (count( (array)$data) > 0) ? $data : false;
-	}
-	
-	public function update($data, $id)
-    {
-        $this->db->where('id', $id);
-        $update = $this->db->update('hibahs', $data);
-        return ($update) ? true : false;
-	}
-	
-	public function getOne($id)
-	{
-		$this->db->where('id', $id);
-		$data = $this->db->get('hibahs')->row();
-		return (count( (array)$data) >0) ? $data : false;
+	public function anggota($id){
+		$this->db->where('hibah_id', $id);
+		$data = $this->db->get('anggotas')->result();
+		return (count( (array)$data) > 0) ? $data : false;
 	}
 	
 	// custom enkripsi

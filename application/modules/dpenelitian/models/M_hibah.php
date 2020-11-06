@@ -11,10 +11,8 @@ class M_hibah extends CI_Model
 	
     public function usulanBaru()
     {
-		$this->db->where('reviewer1_id', $this->id);
 		$this->db->where('status_p', 1);
-		$this->db->or_where('reviewer2_id', $this->id);
-		$this->db->where('status_p', 1);
+		$this->db->where('kategori', 'penelitian');
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;
 	}
