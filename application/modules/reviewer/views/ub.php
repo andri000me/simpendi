@@ -43,7 +43,23 @@
                                             <td>Rp. <?=number_format($hibah->nominal);?></td>
                                             <td><?=$hibah->luaran;?></td>
                                             <td>
-                                            <a href="#edit-modal-<?php echo $hibah->id; ?>-1" class="btn btn-warning btn-rounded waves-effect waves-light" 
+                                            <?php $color = '';
+                                            if ($hibah->reviewer1_id == $this->id){
+                                                if ($hibah->nilai1 > 0){
+                                                    $color = 'success';
+                                                } else {
+                                                    $color = 'warning';
+                                                }
+                                            } else if ($hibah->reviewer2_id == $this->id){
+                                                if ($hibah->nilai2 > 0){
+                                                    $color = 'success';
+                                                } else {
+                                                    $color = 'warning';
+                                                }
+                                            }
+
+                                            ?>
+                                            <a href="#edit-modal-<?php echo $hibah->id; ?>-1" class="btn btn-<?=$color;?> btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i>
                                             </a>

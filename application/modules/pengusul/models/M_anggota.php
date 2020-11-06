@@ -8,4 +8,10 @@ class M_anggota extends CI_Model
         return ($this->db->insert_batch('anggotas', $data)) ? true : false ;
     }
 
+    public function anggota($id){
+		$this->db->where('hibah_id', $id);
+		$data = $this->db->get('anggotas')->result();
+		return (count( (array)$data) > 0) ? $data : false;
+	}
+
 }

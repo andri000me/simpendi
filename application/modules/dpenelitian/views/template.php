@@ -136,8 +136,9 @@
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-spin fa-spinner"></i><span>Review </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?php echo base_url('dpenelitian/Review/');?>">Usulan Baru</a></li>
-                                <li><a href="<?php echo base_url('dpenelitian/Review/hr');?>">Sudah Perbaikan</a></li>
-                                <li><a href="<?php echo base_url('dpenelitian/Review/rr');?>">Riwayat Review</a></li>
+                                <li><a href="<?php echo base_url('dpenelitian/Review/pu');?>">Perbaikan Usulan</a></li>
+                                <li><a href="<?php echo base_url('dpenelitian/Review/laporan');?>">Laporan</a></li>
+                                <li><a href="<?php echo base_url('dpenelitian/Review/pl');?>">Perbaikan Laporan</a></li>
                             </ul>
                         </li>
                         <li>

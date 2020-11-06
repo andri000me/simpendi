@@ -47,7 +47,7 @@
                                                                     <?php } ?>
                                                                 </optgroup>
                                                                 <optgroup label="Mahasiswa">
-                                                                    <option value="WV">West Virginia</option>
+                                                                    <option value=""></option>
                                                                 </optgroup>
                                                             </select>
                                                             </div>

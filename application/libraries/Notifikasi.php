@@ -59,6 +59,11 @@ class Notifikasi
         return $this->CI->session->set_flashdata('notif', $this->notifGagal . " Gagal Hapus Data. <p>" . $param . $this->notifClose);
     }
 
+    public function comment($param = "")
+    {
+        return $this->CI->session->set_flashdata('notif', $this->notifSukses . " Catatan untuk revisi usulan. <p>" . $param . $this->notifClose);
+    }
+
     public function valdasiError($param = "")
     {
         return $this->CI->session->set_flashdata('notif', $this->notifGagal . $param . $this->notifClose);

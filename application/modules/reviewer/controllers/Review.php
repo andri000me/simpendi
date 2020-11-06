@@ -143,7 +143,6 @@ class Review extends CI_Controller
                         } else {
                             $this->M_penilaian->update($nilai, $id, $this->id);
                         }                
-
                         $this->index();
                     } else {
                         $this->notifikasi->gagalEdit();

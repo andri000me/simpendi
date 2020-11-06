@@ -24,13 +24,15 @@ class Penelitian extends CI_Controller
         $this->load->model('M_user');
         $this->load->model('M_hibah');
         $this->load->model('M_anggota');
+        $this->load->model('M_kontrol');
+        $this->semester = $this->M_kontrol->all()->semester_aktif;
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
         } else {
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
-        $this->load->helper(array('file', 'resize'));
+        $this->load->helper(array('file', 'resize','download'));
         $this->load->library('form_validation');
     }
     public function index()
@@ -53,34 +55,28 @@ class Penelitian extends CI_Controller
                 'label' => 'Tahun',
                 'rules' => 'required'
             ),
-
             array(
                 'field' => 'anggotas[]',
                 'label' => 'Anggota',
                 'rules' => 'required'
             ),
-
             array(
                 'field' => 'keilmuan',
                 'label' => 'Keilmuan',
                 'rules' => 'required'
 
             ),
-
             array(
                 'field' => 'nominal',
                 'label' => 'Nominal',
                 'rules' => 'required|numeric'
 
             ),
-
             array(
                 'field' => 'judul',
                 'label' => 'Judul',
                 'rules' => 'required'
-
             ),
-
             array(
                 'field' => 'luaran',
                 'label' => 'Luaran',
@@ -142,7 +138,6 @@ class Penelitian extends CI_Controller
                 $this->index();
             }
 
-            
         } else {
             $this->notifikasi->valdasiError(validation_errors());
 
@@ -150,103 +145,27 @@ class Penelitian extends CI_Controller
         }
     }
 
-    public function update()
+    public function pu()
     {
-        $id = $this->input->post('id', true);
-        if($this->input->post('password', true) != null){
-            $config_rules = array(
-                array(
-                    'field' => 'nama',
-                    'label' => 'Nama',
-                    'rules' => 'required|min_length[6]'
-                ),
-    
-                array(
-                    'field' => 'username',
-                    'label' => 'Username',
-                    'rules' => 'required|min_length[6]'
-                ),
-    
-                array(
-                    'field' => 'password',
-                    'label' => 'Password',
-                    'rules' => 'required|min_length[6]'
-    
-                ),
-    
-                array(
-                    'field' => 'password2',
-                    'label' => 'Confirm Password',
-                    'rules' => 'required|matches[password]'
-                )
-            );
-            $this->form_validation->set_rules($config_rules);
-            if ($this->form_validation->run() == true) {
-                $data['name']	    =	$this->input->post('nama', true);
-                $data['username']	=	$this->input->post('username', true);
-                $data['role']	    =	$this->input->post('role', true);
-                $data['prodi']	    =	$this->input->post('prodi', true);
-                $pass           	=	$this->input->post('password', true);
-                $data['password']	=   password_hash($pass, PASSWORD_BCRYPT);
-
-                if ($this->M_user->update($data, $id)) {
-                    $this->notifikasi->suksesEdit();
-
-                    $this->index();
-                } else {
-                    $this->notifikasi->gagalEdit();
-
-                    $this->index();
-                }
-            } else {
-                $this->notifikasi->valdasiError(validation_errors());
-
-                $this->index();
-            }
-        } else {
-            $config_rules = array(
-                array(
-                    'field' => 'nama',
-                    'label' => 'Nama',
-                    'rules' => 'required|min_length[6]'
-                ),
-    
-                array(
-                    'field' => 'username',
-                    'label' => 'Username',
-                    'rules' => 'required|min_length[6]'
-                )
-            );
-            $this->form_validation->set_rules($config_rules);
-            if ($this->form_validation->run() == true) {
-                $data['name']	    =	$this->input->post('nama', true);
-                $data['username']	=	$this->input->post('username', true);
-                $data['role']	    =	$this->input->post('role', true);
-                $data['prodi']	    =	$this->input->post('prodi', true);
-
-                if ($this->M_user->update($data, $id)) {
-                    $this->notifikasi->suksesEdit();
-
-                    $this->index();
-                } else {
-                    $this->notifikasi->gagalEdit();
-
-                    $this->index();
-                }
-            } else {
-                $this->notifikasi->valdasiError(validation_errors());
-
-                $this->index();
-            }
-        }
+        $tahun = $this->M_tahun->all();
+        $anggota = $this->M_user->anggotas($this->id);
+        $reviewer = $this->M_user->reviewers();
+        $hibah = $this->M_hibah->revisi();
+        if ($hibah != ''){$this->notifikasi->comment($hibah->comment);}
+        $params = array(
+            'title'	    => 'Perbaikan Usulan',
+            'hibah'    => $hibah,
+            'reviewers' => $reviewer,
+            'anggotas'  => $anggota,
+            'tahuns'    => $tahun,
+            'page'	    => 'penelitian/pu');
+        $this->template($params);
     }
 
-    public function delete()
+    public function download()
     {
-        $id = $this->input->get("id", true);
-        $delete = $this->M_user->delete($id);
-        ($delete) ? $this->notifikasi->suksesHapus() : $this->notifikasi->gagalHapus();
-        $this->index();
+        $nama_file = $this->input->get('file', true);
+        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
     }
 
     public function template($params = array())

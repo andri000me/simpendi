@@ -11,7 +11,6 @@ class M_hibah extends CI_Model
 	
     public function penelitianBaru()
     {
-		$this->db->where('status_p', 1);
 		$this->db->where('kategori', 'penelitian');
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;
@@ -19,7 +18,6 @@ class M_hibah extends CI_Model
 
     public function pengabdianBaru()
     {
-		$this->db->where('status_p', 1);
 		$this->db->where('kategori', 'pengabdian');
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;

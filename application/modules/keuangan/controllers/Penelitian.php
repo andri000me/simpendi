@@ -62,6 +62,7 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             $data['nominal'] = $this->input->post('nominal', true);
+            $data['status_p'] = 2;
             $id    = $this->input->post('id', true);
 
             if ($this->M_hibah->update($data, $id)) {

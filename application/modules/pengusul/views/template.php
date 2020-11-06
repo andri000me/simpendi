@@ -312,7 +312,6 @@
     <!-- Modal-Effect -->
     <script src="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/custombox.min.js"></script>
     <script src="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/legacy.min.js"></script>
-
 </body>
 
 </html>
