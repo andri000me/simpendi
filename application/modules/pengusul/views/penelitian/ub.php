@@ -91,7 +91,7 @@
                                                     <div class="col-3 float-right">
                                                     <h4 class="header-title m-t-0 m-b-30">Proposal</h4>
                                                     <p class="text-muted m-b-30 font-14">
-                                                        file pdf
+                                                        file word [doc | docx | rtf]
                                                     </p>
                                                     <input type="file" class="dropify" data-height="300" name="proposal"/>
                                                     </div>

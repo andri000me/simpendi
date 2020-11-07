@@ -88,7 +88,7 @@ class Penelitian extends CI_Controller
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/proposal/';
-                $config['allowed_types']	= 'pdf';
+                $config['allowed_types']	= 'doc|docx|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -151,7 +151,7 @@ class Penelitian extends CI_Controller
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi();
-        if ($hibah != ''){$this->notifikasi->comment($hibah->comment);}
+        if ($hibah->status_p == 2){$this->notifikasi->comment($hibah->comment);}
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
@@ -160,6 +160,79 @@ class Penelitian extends CI_Controller
             'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         $this->template($params);
+    }
+
+    public function perbaikan()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'keilmuan',
+                'label' => 'Keilmuan',
+                'rules' => 'required'
+
+            ),
+            array(
+                'field' => 'keilmuan',
+                'label' => 'keilmuan',
+                'rules' => 'required'
+
+            ),
+            array(
+                'field' => 'judul',
+                'label' => 'Judul',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            if ($_FILES['proposal']['size'] > 0) {
+                $config['upload_path']		= './upload/penelitian/proposal/perbaikan/';
+                $config['allowed_types']	= 'docx|doc';
+                $config['detect_mime']	  = true;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('proposal')) {
+                    $proposal 			= $this->upload->data();
+                    $data['proposal']	= $proposal['file_name'];
+                    $id     	        =   $this->input->post('id', true);
+                    $data['judul']	    =	$this->input->post('judul', true);
+                    $data['keilmuan']	=	$this->input->post('keilmuan', true);
+                    $data['luaran']	    =	$this->input->post('luaran', true);
+                    $data['status_p']	=	3;
+
+                    if ($this->M_hibah->update($data, $id)) {
+                        
+                        $this->notifikasi->suksesEdit();
+
+                        $this->pu();
+                    } else {
+                        $this->notifikasi->gagalEdit();
+
+                        $this->pu();
+                    }
+                    
+                } else {
+                    $this->notifikasi->gagalAdd('proposal gagal upload');
+
+                    $this->pu();
+                }
+            } else {
+                $this->notifikasi->gagalAdd('proposal kosong');
+
+                $this->index();
+            }
+
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->pu();
+        }
     }
 
     public function download()

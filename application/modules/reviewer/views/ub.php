@@ -28,8 +28,8 @@
                                         <?php if ($hibahs != ''){
                                         foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url('reviewer/Review/download?file='.$hibah->proposal);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
-                                                <i class="fa fa-file-pdf-o"></i></a>
+                                            <td><a href="<?php echo base_url('reviewer/Review/download?file='.$hibah->proposal);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
                                             </td>
                                             <td><?=$hibah->judul; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>

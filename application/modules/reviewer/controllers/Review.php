@@ -98,7 +98,7 @@ class Review extends CI_Controller
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/proposal/';
-                $config['allowed_types']	= 'pdf';
+                $config['allowed_types']	= 'doc|docx|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);

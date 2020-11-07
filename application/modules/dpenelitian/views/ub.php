@@ -28,10 +28,10 @@
                                         <?php if ($hibahs != ''){
                                         foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url('dpenelitian/Review/download?file='.$hibah->proposal_review1);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
-                                                <i class="fa fa-file-pdf-o"></i> 1</a>
-                                                <a href="<?php echo base_url('dpenelitian/Review/download?file='.$hibah->proposal_review2);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
-                                                <i class="fa fa-file-pdf-o"></i> 2</a>
+                                            <td><a href="<?php echo base_url('dpenelitian/Review/download?file='.$hibah->proposal_review1);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i> 1</a>
+                                                <a href="<?php echo base_url('dpenelitian/Review/download?file='.$hibah->proposal_review2);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i> 2</a>
                                             </td>
                                             <td><?=$hibah->judul; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
