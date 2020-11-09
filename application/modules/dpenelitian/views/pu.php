@@ -44,10 +44,14 @@
                                             <td>Rp. <?=number_format($hibah->nominal);?></td>
                                             <td><?=$hibah->luaran;?></td>
                                             <td>
+                                            <?php if ($hibah->status_p != 5){?>
                                             <a href="#edit-modal-<?php echo $hibah->id; ?>-1" class="btn btn-warning btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i>
                                             </a>
+                                            <?php } else {?>
+                                            <a href="#" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a>
+                                            <?php } ?>
                                             </td>
                                             
                                             <!-- Modal set reviewer 1-->

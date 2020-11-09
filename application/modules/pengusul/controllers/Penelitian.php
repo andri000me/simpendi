@@ -33,7 +33,7 @@ class Penelitian extends CI_Controller
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
         $this->load->helper(array('file', 'resize','download'));
-        $this->load->library('form_validation');
+        $this->load->library(array('form_validation', 'm_pdf'));
     }
     public function index()
     {
@@ -151,7 +151,7 @@ class Penelitian extends CI_Controller
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi();
-        if ($hibah != ''){if ($hibah->status_p == 2){$this->notifikasi->comment($hibah->comment);}}
+        if ($hibah != ''){if ($hibah->status_p == 2 || $hibah->status_p == 4){$this->notifikasi->comment($hibah->comment);}}
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
@@ -206,6 +206,9 @@ class Penelitian extends CI_Controller
                     $data['luaran']	    =	$this->input->post('luaran', true);
                     $data['status_p']	=	3;
 
+                    $fileSblumnya = $this->M_hibah->revisi();
+                    @unlink('./upload/penelitian/proposal/'.$fileSblumnya->proposal);
+
                     if ($this->M_hibah->update($data, $id)) {
                         
                         $this->notifikasi->suksesEdit();
@@ -241,17 +244,38 @@ class Penelitian extends CI_Controller
         force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
     }
 
+    public function pengesahan()
+    {
+        $tahun = $this->M_tahun->all();
+        $anggota = $this->M_user->anggotas($this->id);
+        $reviewer = $this->M_user->reviewers();
+        $hibah = $this->M_hibah->revisi();
+        $params = array(
+            'title'	    => 'Perbaikan Usulan',
+            'hibah'    => $hibah,
+            'reviewers' => $reviewer,
+            'anggotas'  => $anggota,
+            'tahuns'    => $tahun,
+            'page'	    => 'penelitian/pu');
+        require_once APPPATH.'../application/third_party/vendor/autoload.php';
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
+        $data = $this->load->view('lembarPengesahan', $params, TRUE);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();
+    }
+
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
             if ($this->role == 'pengusul') {
                 $params['menu']	= 'menu/menu';
             } else {
-                redirect('warning', 'refresh');
+                redirect('Login', 'refresh');
             }
             $this->load->view('template', $params);
         } else {
-            redirect('warning', 'refresh');
+            redirect('Login', 'refresh');
         }
     }
 

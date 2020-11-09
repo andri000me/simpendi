@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-class m_pdf {
+class M_pdf {
     
-    function m_pdf()
+    function index()
     {
         $CI = & get_instance();
         log_message('Debug', 'mPDF class is loaded.');
@@ -9,14 +9,14 @@ class m_pdf {
  
     function load($param=NULL)
     {
-        include_once APPPATH.'../application/third_party/mpdf/mpdf.php';
+        require_once APPPATH.'../application/third_party/vendor/autoload.php';
          
-        if ($params == NULL)
+        if ($param == NULL)
         {
             $param = "'c', 'A4', '', '', 15, 15, 16, 16, 9, 9, 'P'";          		
         }
-         
-        return new mPDF($param);
+         $mpdf = new \Mpdf\Mpdf();
+        return $mpdf->AddPage($param);
         // return new mPDF();
     }
 }

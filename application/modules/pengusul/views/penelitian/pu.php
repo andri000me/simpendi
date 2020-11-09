@@ -62,7 +62,7 @@
                                                     <i class="fa fa-edit"></i>
                                             </a>
                                             <?php } else { ?>
-                                            <a href="#" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a>
+                                            <a href="<?php echo base_url('pengusul/Penelitian/pengesahan');?>" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a>
                                             <?php } ?>
                                             </td>
                                             <!-- Modal set reviewer 1-->
@@ -129,8 +129,10 @@
                                     </table>
                                 </div>
                             </div>
-                        </div>
+         </div>
         <!-- end row -->
+                           
+                            <!-- end col -->
     </div> <!-- container -->
 </div>
 
@@ -147,6 +149,7 @@
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.print.min.js"></script>
 
 <script type="text/javascript">
+            
             $(document).ready(function () {
 
                 // Default Datatable

@@ -122,20 +122,20 @@ class Review extends CI_Controller
             $id    = $this->input->post('id', true);
 
             $hibah = $this->M_hibah->getOne($id);
-            $data['comment'] = $hibah->comment.' '.$this->name.' => '.$comment.'.<br>';
+            $data['comment'] = $hibah->comment.' ------- Catatan revisi ulang -------<br>'.$this->name.' => '.$comment.'.<br>';
             if ($this->M_hibah->update($data, $id)) {
                 $this->notifikasi->suksesEdit('');
 
-                $this->index();
+                $this->pu();
             } else {
                 $this->notifikasi->gagalEdit();
 
-                $this->index();
+                $this->pu();
             }
         } else {
             $this->notifikasi->valdasiError(validation_errors());
 
-            $this->index();
+            $this->pu();
         }
     }
 
