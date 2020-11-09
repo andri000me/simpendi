@@ -11,7 +11,20 @@ class M_hibah extends CI_Model
 	
     public function usulanBaru()
     {
+		$this->db->where('tahun', $this->semester);
 		$this->db->where('status_p', 1);
+		$this->db->where('kategori', 'penelitian');
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
+
+    public function perbaikanUsulan()
+    {
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'penelitian');
+		$this->db->where('status_p', 3);
+		$this->db->or_where('status_p', 5);
+		$this->db->where('tahun', $this->semester);
 		$this->db->where('kategori', 'penelitian');
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;

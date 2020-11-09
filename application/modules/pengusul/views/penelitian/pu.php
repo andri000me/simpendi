@@ -54,11 +54,16 @@
                                                 echo '';
                                             }?>
                                             </td>
-                                            <?php $color = ''; if ($hibah->status_p == 2){$color='warning';} else if ($hibah->status_p == 3){ $color = 'danger';}?>
-                                            <td><a href="#edit-modal-<?php echo $hibah->id; ?>" class="btn btn-<?=$color;?> btn-rounded waves-effect waves-light" 
+                                            <td>
+                                            <?php if ($hibah->status_p != 5) {$color = ''; if ($hibah->status_p == 2 || $hibah->status_p == 4){$color='warning';} 
+                                            else if ($hibah->status_p == 3 || $hibah->status_p == 5){ $color = 'danger';}?>
+                                            <a href="#edit-modal-<?php echo $hibah->id; ?>" class="btn btn-<?=$color;?> btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i>
                                             </a>
+                                            <?php } else { ?>
+                                            <a href="#" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a>
+                                            <?php } ?>
                                             </td>
                                             <!-- Modal set reviewer 1-->
                                             <div id="edit-modal-<?php echo $hibah->id; ?>" class="modal-demo">

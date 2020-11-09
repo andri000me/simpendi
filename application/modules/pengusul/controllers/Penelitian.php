@@ -151,7 +151,7 @@ class Penelitian extends CI_Controller
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi();
-        if ($hibah->status_p == 2){$this->notifikasi->comment($hibah->comment);}
+        if ($hibah != ''){if ($hibah->status_p == 2){$this->notifikasi->comment($hibah->comment);}}
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
@@ -192,8 +192,8 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/proposal/perbaikan/';
-                $config['allowed_types']	= 'docx|doc';
+                $config['upload_path']		= './upload/penelitian/proposal/';
+                $config['allowed_types']	= 'docx|doc|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);

@@ -24,6 +24,8 @@ class Review extends CI_Controller
         $this->load->model('M_anggota');
         $this->load->model('M_user');
         $this->load->model('M_penilaian');
+        $this->load->model('M_kontrol');
+        $this->semester = $this->M_kontrol->all()->semester_aktif;
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);

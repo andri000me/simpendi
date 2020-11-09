@@ -24,6 +24,8 @@ class Review extends CI_Controller
         $this->load->model('M_anggota');
         $this->load->model('M_user');
         $this->load->model('M_penilaian');
+        $this->load->model('M_kontrol');
+        $this->semester = $this->M_kontrol->all()->semester_aktif;
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
@@ -68,6 +70,61 @@ class Review extends CI_Controller
             $data['comment'] = $hibah->comment.' '.$this->name.' => '.$comment.'.<br>';
             if ($this->M_hibah->update($data, $id)) {
                 $this->notifikasi->suksesEdit('comment berhasil diberikan');
+
+                $this->index();
+            } else {
+                $this->notifikasi->gagalEdit();
+
+                $this->index();
+            }
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->index();
+        }
+    }
+
+    public function pu()
+    {
+        $reviewer = $this->M_user->reviewers();
+        $hibahs = $this->M_hibah->perbaikanUsulan();
+        $params = array(
+            'title'	    => 'Perbaikan Usulan',
+            'reviewers' => $reviewer,
+            'hibahs'    => $hibahs,
+            'page'	    => 'pu');
+        $this->template($params);
+    }
+
+    public function perbaikan()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'comment',
+                'label' => 'Comment',
+                'rules' => ''
+            ),
+            array(
+                'field' => 'status',
+                'label' => 'status',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            $data['status_p'] = $this->input->post('status', true);
+            $comment = $this->input->post('comment', true);
+            $id    = $this->input->post('id', true);
+
+            $hibah = $this->M_hibah->getOne($id);
+            $data['comment'] = $hibah->comment.' '.$this->name.' => '.$comment.'.<br>';
+            if ($this->M_hibah->update($data, $id)) {
+                $this->notifikasi->suksesEdit('');
 
                 $this->index();
             } else {
