@@ -29,6 +29,27 @@ class M_hibah extends CI_Model
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;
 	}
+
+	public function laporanPendahuluan()
+	{
+		$this->db->where('status_l', 1);
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'penelitian');
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
+
+	public function laporanPerbaikan()
+	{
+		$this->db->where('status_l', 3);
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'penelitian');
+		$this->db->or_where('status_l', 5);
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'penelitian');
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
 	
 	public function update($data, $id)
     {

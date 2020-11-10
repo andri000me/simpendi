@@ -137,7 +137,7 @@
                             <ul class="list-unstyled">
                                 <li><a href="<?php echo base_url('dpenelitian/Review/');?>">Usulan Baru</a></li>
                                 <li><a href="<?php echo base_url('dpenelitian/Review/pu');?>">Perbaikan Usulan</a></li>
-                                <li><a href="<?php echo base_url('dpenelitian/Review/laporan');?>">Laporan</a></li>
+                                <li><a href="<?php echo base_url('dpenelitian/Review/lp');?>">Laporan</a></li>
                                 <li><a href="<?php echo base_url('dpenelitian/Review/pl');?>">Perbaikan Laporan</a></li>
                             </ul>
                         </li>

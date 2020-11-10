@@ -147,7 +147,6 @@ class Penelitian extends CI_Controller
 
     public function pu()
     {
-        $tahun = $this->M_tahun->all();
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi();
@@ -157,7 +156,6 @@ class Penelitian extends CI_Controller
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
-            'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         $this->template($params);
     }
@@ -305,6 +303,78 @@ class Penelitian extends CI_Controller
         }
     }
 
+    public function pl()
+    {
+        $anggota = $this->M_user->anggotas($this->id);
+        $reviewer = $this->M_user->reviewers();
+        $hibah = $this->M_hibah->revisi_laporan();
+        if ($hibah != ''){if ($hibah->status_l == 2){$this->notifikasi->comment($hibah->comment);}}
+        $params = array(
+            'title'	    => 'Perbaikan Laporan',
+            'hibah'    => $hibah,
+            'reviewers' => $reviewer,
+            'anggotas'  => $anggota,
+            'page'	    => 'penelitian/pl');
+        $this->template($params);
+
+    }
+
+    public function rev_laporan()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            if ($_FILES['laporan']['size'] > 0) {
+                $config['upload_path']		= './upload/penelitian/laporan/';
+                $config['allowed_types']	= 'docx|doc|rtf';
+                $config['detect_mime']	  = true;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('laporan')) {
+                    $laporan 			= $this->upload->data();
+                    $data['laporan']	= $laporan['file_name'];
+                    $id     	        =   $this->input->post('id', true);
+                    $data['status_l']	=	3;
+
+                    $fileSblumnya = $this->M_hibah->revisi_laporan();
+                    @unlink('./upload/penelitian/laporan/'.$fileSblumnya->laporan);
+
+                    if ($this->M_hibah->update($data, $id)) {
+                        
+                        $this->notifikasi->suksesEdit('laporan berhasil upload');
+
+                        $this->pl();
+                    } else {
+                        $this->notifikasi->gagalEdit();
+
+                        $this->pl();
+                    }
+                    
+                } else {
+                    $this->notifikasi->gagalAdd('laporan gagal upload');
+
+                    $this->pl();
+                }
+            } else {
+                $this->notifikasi->gagalAdd('laporan kosong');
+
+                $this->pl();
+            }
+
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->pl();
+        }
+    }
+
     public function download()
     {
         $nama_file = $this->input->get('file', true);
@@ -328,6 +398,27 @@ class Penelitian extends CI_Controller
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
         $data = $this->load->view('lembarPengesahan', $params, TRUE);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();
+    }
+
+    public function pengesahan2()
+    {
+        $tahun = $this->M_tahun->all();
+        $anggota = $this->M_user->anggotas($this->id);
+        $reviewer = $this->M_user->reviewers();
+        $hibah = $this->M_hibah->revisi();
+        $params = array(
+            'title'	    => 'Perbaikan Usulan',
+            'hibah'    => $hibah,
+            'reviewers' => $reviewer,
+            'anggotas'  => $anggota,
+            'tahuns'    => $tahun,
+            'page'	    => 'penelitian/pu');
+        require_once APPPATH.'../application/third_party/vendor/autoload.php';
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
+        $data = $this->load->view('lembarPengesahan2', $params, TRUE);
         $mpdf->WriteHTML($data);
         $mpdf->Output();
     }

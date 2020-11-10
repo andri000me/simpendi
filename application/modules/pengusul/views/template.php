@@ -141,7 +141,7 @@
                                 <li><a href="<?php echo base_url('pengusul/Penelitian');?>">Usulan Baru</a></li>
                                 <li><a href="<?php echo base_url('pengusul/Penelitian/pu');?>">Perbaikan Usulan</a></li>
                                 <li><a href="<?php echo base_url('pengusul/Penelitian/lp');?>">Laporan Pendahuluan</a></li>
-                                <li><a href="<?php echo base_url('pengusul/User/pl');?>">Perbaikan Laporan</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Penelitian/pl');?>">Perbaikan Laporan</a></li>
                             </ul>
                         </li>
                         <li class="has_sub">

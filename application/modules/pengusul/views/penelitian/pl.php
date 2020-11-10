@@ -3,9 +3,9 @@
     <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="m-t-0 header-title">Laporan pendahuluan</h4>
+                                    <h4 class="m-t-0 header-title">Perbaikan Laporan</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data laporan pendahuluan penelitian pendanaan institusi.
+                                        Data perbaikan laporan penelitian pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -27,13 +27,15 @@
                                         <?php if ($hibah != ''){?>
                                         <tr>
                                         
-                                            <td><?php if($hibah->status_l == '' || $hibah->status_l == 0 ) {?>
-                                                <form action="<?php echo base_url('pengusul/Penelitian/laporan');?>" method="post" enctype="multipart/form-data" >
+                                            <td><?php if($hibah->status_l == 2 ) {?>
+                                                <form action="<?php echo base_url('pengusul/Penelitian/rev_laporan');?>" method="post" enctype="multipart/form-data" >
                                                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                 <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
                                                 <input type="file" class="dropify" data-height="90" name="laporan"/>
                                                 <button type="submit" class="btn btn-primary btn-rounded" style="width:100%;">Submit</button>
-                                                </form><?php } else {?>
+                                                </form><?php } else if ($hibah->status_l == 5){?>
+                                                    <a href="<?php echo base_url('pengusul/Penelitian/pengesahan2');?>" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a
+                                                <?php } else {?>
                                                 <div class="card card-body">Sudah upload</div><?php } ?>
                                             </td>
                                             <td><?=$hibah->judul; ?></td>
