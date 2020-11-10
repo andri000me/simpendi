@@ -25,6 +25,15 @@ class M_hibah extends CI_Model
         $data = $this->db->get('hibahs')->row();
         return (count( (array)$data) > 0) ? $data : false;
     }
+
+    public function laporan()
+    {
+        $this->db->where('tahun', $this->semester);
+        $this->db->where('status_p', 5);
+        $this->db->where('user_id', $this->id);
+        $data = $this->db->get('hibahs')->row();
+        return (count( (array)$data) > 0) ? $data : false;
+    }
     
     public function update($data, $id)
     {

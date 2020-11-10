@@ -162,6 +162,20 @@ class Penelitian extends CI_Controller
         $this->template($params);
     }
 
+    public function lp()
+    {
+        $anggota = $this->M_user->anggotas($this->id);
+        $reviewer = $this->M_user->reviewers();
+        $hibah = $this->M_hibah->laporan();
+        $params = array(
+            'title'	    => 'Laporan pendahuluan',
+            'hibah'    => $hibah,
+            'reviewers' => $reviewer,
+            'anggotas'  => $anggota,
+            'page'	    => 'penelitian/lp');
+        $this->template($params);
+    }
+
     public function perbaikan()
     {
         $config_rules = array(
@@ -228,13 +242,66 @@ class Penelitian extends CI_Controller
             } else {
                 $this->notifikasi->gagalAdd('proposal kosong');
 
-                $this->index();
+                $this->pu();
             }
 
         } else {
             $this->notifikasi->valdasiError(validation_errors());
 
             $this->pu();
+        }
+    }
+
+    public function laporan()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            if ($_FILES['laporan']['size'] > 0) {
+                $config['upload_path']		= './upload/penelitian/laporan/';
+                $config['allowed_types']	= 'docx|doc|rtf';
+                $config['detect_mime']	  = true;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('laporan')) {
+                    $laporan 			= $this->upload->data();
+                    $data['laporan']	= $laporan['file_name'];
+                    $id     	        =   $this->input->post('id', true);
+                    $data['status_l']	=	1;
+
+                    if ($this->M_hibah->update($data, $id)) {
+                        
+                        $this->notifikasi->suksesEdit('laporan berhasil upload');
+
+                        $this->lp();
+                    } else {
+                        $this->notifikasi->gagalEdit();
+
+                        $this->lp();
+                    }
+                    
+                } else {
+                    $this->notifikasi->gagalAdd('laporan gagal upload');
+
+                    $this->lp();
+                }
+            } else {
+                $this->notifikasi->gagalAdd('laporan kosong');
+
+                $this->lp();
+            }
+
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->lp();
         }
     }
 
