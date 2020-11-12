@@ -12,22 +12,40 @@
                                         <thead>
                                         <tr>
                                             <th>Download</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>Judul</th>
+                                            <th>Ketua</th>
+                                            <th>NIDN / NUPN</th>
+                                            <th>Anggota</th>
+                                            <th>Prodi</th>
+                                            <th>Nominal</th>
+                                            <th>Luaran</th>
+                                            <th>Kontrak</th>
                                         </tr>
                                         </thead>
 
 
                                         <tbody>
-                                        <?php foreach ($hibahs as $hibah) { ?>
+                                        <?php if ($hibahs != ''){
+                                        foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><a href="<?php echo base_url('operator/Penelitian/download?file='.$hibah->laporan);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
+                                            </td>
+                                            <td><?=$hibah->judul; ?></td>
+                                            <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
+                                            <td><?= $this->M_user->ketua($hibah->user_id)->username;?></td>
+                                            <td><?php
+                                            foreach ($this->M_anggota->anggota($hibah->id) as $anggota){
+                                                echo $this->M_user->anggota($anggota->user_id)->name.', ';
+                                            }
+                                            ?></td>
+                                            <td><?= $hibah->prodi;?></td>
+                                            <td>Rp. <?=number_format($hibah->nominal);?></td>
+                                            <td><?=$hibah->luaran;?></td>
+                                            <td><?php if ($hibah->kontrak != '') { echo $hibah->kontrak;}?>
+                                            </td>
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }?>
                                         </tbody>
                                     </table>
                                 </div>

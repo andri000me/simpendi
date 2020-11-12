@@ -34,7 +34,7 @@
                                                 <input type="file" class="dropify" data-height="90" name="laporan"/>
                                                 <button type="submit" class="btn btn-primary btn-rounded" style="width:100%;">Submit</button>
                                                 </form><?php } else if ($hibah->status_l == 5){?>
-                                                    <a href="<?php echo base_url('pengusul/Penelitian/pengesahan2');?>" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a
+                                                    <a href="<?php echo base_url('pengusul/Penelitian/pengesahan2');?>" class="btn btn-success btn-rounded waves-effect waves-light">ACC</a>
                                                 <?php } else {?>
                                                 <div class="card card-body">Sudah upload</div><?php } ?>
                                             </td>

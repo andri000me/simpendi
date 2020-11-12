@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Penelitian extends CI_Controller
+class Sk extends CI_Controller
 {
     public function __construct()
     {
@@ -11,7 +11,7 @@ class Penelitian extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'keuangan')) {
+        if (empty($this->login) && ($this->role != 'operator')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -20,63 +20,86 @@ class Penelitian extends CI_Controller
         $this->u5		= $this->uri->segment(5);
         $this->u6		= $this->uri->segment(6);
         $this->load->model('M_Universal');
-        $this->load->model('M_hibah');
-        $this->load->model('M_anggota');
-        $this->load->model('M_user');
-        $this->load->model('M_penilaian');
+        $this->load->model('M_tahun');
         $this->load->model('M_Sk');
         $this->load->model('M_kontrol');
         $this->semester = $this->M_kontrol->all()->semester_aktif;
-        $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
+        $data = $this->M_Universal->getOne(array("id_adm" => $this->id), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
         } else {
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
-        $this->load->helper(array('file', 'resize','download'));
-        $this->load->library('form_validation');
+        $this->load->helper(array('file', 'resize', 'download'));
     }
     public function index()
     {
-        $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->penelitianBaru();
+        $tahun = $this->M_tahun->all();
         $params = array(
-            'title'	    => 'Penelitian',
-            'reviewers' => $reviewer,
-            'hibahs'    => $hibahs,
-            'page'	    => 'penelitian');
+            'title'	    => 'Upload SK',
+            'tahuns'    => $tahun,
+            'page'	    => 'sk/upload');
         $this->template($params);
     }
 
-    public function set_nominal()
+    public function upload_sk()
     {
         $config_rules = array(
+            
             array(
-                'field' => 'nominal',
-                'label' => 'Nominal',
+                'field' => 'tahun',
+                'label' => 'Tahun',
+                'rules' => 'required'
+
+            ),
+            array(
+                'field' => 'nomor',
+                'label' => 'Nomor',
                 'rules' => 'required'
             ),
             array(
-                'field' => 'id',
-                'label' => 'id',
+                'field' => 'tanggal',
+                'label' => 'Tanggal',
                 'rules' => 'required'
             )
         );
+
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
-            $data['nominal'] = $this->input->post('nominal', true);
-            $data['status_p'] = 2;
-            $id    = $this->input->post('id', true);
+            if ($_FILES['sk']['size'] > 0) {
+                $config['upload_path']		= './upload/sk/';
+                $config['allowed_types']	= 'pdf';
+                $config['detect_mime']	  = true;
+                $config['encrypt_name'] = true;
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('sk')) {
+                    $sk 			    =   $this->upload->data();
+                    $data['sk']	        =   $sk['file_name'];
+                    $data['tahun']	    =	$this->input->post('tahun', true);
+                    $data['nomor']	    =	$this->input->post('nomor', true);
+                    $data['tanggal']	=	$this->input->post('tanggal', true);
 
-            if ($this->M_hibah->update($data, $id)) {
-                $this->notifikasi->suksesEdit('nominal disetujui telah di set');
+                    if ($this->M_Sk->insert($data)) {
+                        $this->notifikasi->suksesAdd();
 
-                $this->index();
+                        $this->index();
+                    } else {
+                        $this->notifikasi->gagalAdd();
+
+                        $this->index();
+                    }
+                    
+                } else {
+                    $this->notifikasi->gagalAdd('sk gagal upload');
+
+                    $this->index();
+                }
             } else {
-                $this->notifikasi->gagalEdit();
+                $this->notifikasi->gagalAdd('sk kosong');
 
                 $this->index();
             }
+
         } else {
             $this->notifikasi->valdasiError(validation_errors());
 
@@ -93,7 +116,7 @@ class Penelitian extends CI_Controller
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'keuangan') {
+            if ($this->role == 'operator') {
                 $params['menu']	= 'menu/menu';
             } else {
                 redirect('warning', 'refresh');

@@ -115,10 +115,81 @@ class Penelitian extends CI_Controller
         }
     }
 
+    public function pu()
+    {
+        $reviewer = $this->M_user->reviewers();
+        $hibahs = $this->M_hibah->perbaikanUsulan();
+        $params = array(
+            'title'	    => 'Perbaikan Usulan',
+            'reviewers' => $reviewer,
+            'hibahs'    => $hibahs,
+            'page'	    => 'penelitian/pu');
+        $this->template($params);
+    }
+
     public function download()
     {
         $nama_file = $this->input->get('file', true);
         force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+    }
+
+    public function set_kontrak()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'kontrak',
+                'label' => 'kontrak',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            $data['kontrak']	    = $this->input->post('kontrak', true);
+            $id                         = $this->input->post('id', true);
+
+            if ($this->M_hibah->update($data, $id)) {
+                $this->notifikasi->suksesEdit();
+
+                $this->pu();
+            } else {
+                $this->notifikasi->gagalEdit();
+
+                $this->pu();
+            }
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->pu();
+        }
+    }
+
+    public function lp()
+    {
+        $reviewer = $this->M_user->reviewers();
+        $hibahs = $this->M_hibah->laporanPendahuluan();
+        $params = array(
+            'title'	    => 'Laporan Pendahuluan',
+            'reviewers' => $reviewer,
+            'hibahs'    => $hibahs,
+            'page'	    => 'penelitian/lp');
+        $this->template($params);
+    }
+
+    public function pl()
+    {
+        $reviewer = $this->M_user->reviewers();
+        $hibahs = $this->M_hibah->perbaikanLaporan();
+        $params = array(
+            'title'	    => 'Perbaikan Laporan',
+            'reviewers' => $reviewer,
+            'hibahs'    => $hibahs,
+            'page'	    => 'penelitian/pl');
+        $this->template($params);
     }
 
     public function template($params = array())

@@ -35,6 +35,10 @@
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/custombox.min.css" rel="stylesheet" type="text/css" />
     <!-- Sweet Alert css -->
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/sweet-alert/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url()?>assets/adminto/assets/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="<?php echo base_url()?>assets/adminto/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
+    <!-- form Uploads -->
+    <link href="<?php echo base_url()?>assets/adminto/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
     <script
         src="<?php echo base_url()?>assets/adminto/assets/js/modernizr.min.js">
     </script>
@@ -154,6 +158,13 @@
                                 <li><a href="<?php echo base_url('Belakang/profil/edit');?>">Profil</a></li>
                                 <li><a href="<?php echo base_url('Belakang/profil/password/');?>">Password</a></li>
                                 <li><a href="<?php echo base_url('operator/User/');?>">Users</a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-file-text"></i><span>SK </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?php echo base_url('operator/SK/');?>">Upload SK</a></li>
+                                <li><a href="<?php echo base_url('operator/SK/daftar_sk');?>">Daftar SK</a></li>
                             </ul>
                         </li>
                         <li>

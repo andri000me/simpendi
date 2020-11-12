@@ -12,22 +12,80 @@
                                         <thead>
                                         <tr>
                                             <th>Download</th>
-                                            <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            <th>Judul</th>
+                                            <th>Ketua</th>
+                                            <th>NIDN / NUPN</th>
+                                            <th>Anggota</th>
+                                            <th>Prodi</th>
+                                            <th>Nominal</th>
+                                            <th>Luaran</th>
+                                            <th>Kontrak</th>
                                         </tr>
                                         </thead>
 
 
                                         <tbody>
-                                        <?php foreach ($hibahs as $hibah) { ?>
+                                        <?php if ($hibahs != ''){
+                                        foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td><a href="<?php echo base_url('operator/Penelitian/download?file='.$hibah->proposal);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
+                                            </td>
+                                            <td><?=$hibah->judul; ?></td>
+                                            <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
+                                            <td><?= $this->M_user->ketua($hibah->user_id)->username;?></td>
+                                            <td><?php
+                                            foreach ($this->M_anggota->anggota($hibah->id) as $anggota){
+                                                echo $this->M_user->anggota($anggota->user_id)->name.', ';
+                                            }
+                                            ?></td>
+                                            <td><?= $hibah->prodi;?></td>
+                                            <td>Rp. <?=number_format($hibah->nominal);?></td>
+                                            <td><?=$hibah->luaran;?></td>
+                                            <td><?php if ($hibah->kontrak != '') { echo $hibah->kontrak;}?>
+                                            <a href="#edit-modal-<?php echo $hibah->id; ?>-1" class="btn btn-warning btn-rounded waves-effect waves-light" 
+                                                    data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
+                                                    <i class="fa fa-edit"></i>
+                                            </a>
+                                            </td>
+                                            
+                                            
+                                                <!-- Modal set reviewer 1-->
+                                                <div id="edit-modal-<?php echo $hibah->id; ?>-1" class="modal-demo">
+                                                    <button type="button" class="close" onclick="Custombox.close();">
+                                                        <span>&times;</span><span class="sr-only">Close</span>
+                                                    </button>
+                                                    <h4 class="custom-modal-title">Set No. Kontrak</h4>
+                                                    <div class="custom-modal-text">
+                                                        <form action="<?php echo base_url('operator/Penelitian/set_kontrak');?>" data-parsley-validate novalidate method="post">
+                                                        <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
+                                                        value="<?=$this->security->get_csrf_hash();?>" style="display: none">
+                                                        <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
+
+                                                            
+                                                            <div class="form-group text-left">
+                                                                <label for="kontrak">No. Kontrak</label>
+                                                                <input type="text" class="form-control" placeholder="input nomor kontrak" name="kontrak">
+                                                            </div>
+
+                                                            <div class="form-group text-right m-b-0">
+                                                                <button class="btn btn-primary waves-effect btn-rounded waves-light" type="submit">
+                                                                    Submit
+                                                                </button>
+                                                                <button type="reset" class="btn btn-secondary btn-rounded waves-effect waves-light m-l-5">
+                                                                    Cancel
+                                                                </button>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Modal set reviewer 2-->
+                                            
+                                                
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }?>
                                         </tbody>
                                     </table>
                                 </div>

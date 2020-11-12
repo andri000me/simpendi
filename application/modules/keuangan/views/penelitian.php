@@ -28,10 +28,10 @@
 
                                         <tbody>
                                         <?php if ($hibahs != ''){
-                                        foreach ($hibahs as $hibah) { ?>
+                                        foreach ($hibahs as $hibah) { $sk = $this->M_Sk->sk($hibah->tahun);?>
                                         <tr>
-                                            <td></td>
-                                            <td></td>
+                                            <td><?php if ($sk != ''){echo $sk->nomor;} ?></td>
+                                            <td><?php if ($sk != ''){echo $sk->tanggal;} ?></td>
                                             <td><?=$hibah->kontrak; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->username;?></td>
