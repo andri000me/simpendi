@@ -26,13 +26,10 @@ class M_Sk extends CI_Model
         return ($this->db->where('id', $id)->delete('sk')) ? true : false ;
     }
 
-    public function getOne($where, $tabel)
+    public function getOne($id)
     {
-        if (!empty($where)) {
-            $this->db->where($where);
-        }
-
-        $data = $this->db->get($tabel)->row();
+        $this->db->where('id', $id);
+        $data = $this->db->get('sk')->row();
         return (count( (array)$data) > 0) ? $data : false;
     }
 
