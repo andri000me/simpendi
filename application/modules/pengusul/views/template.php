@@ -153,6 +153,23 @@
                                 <li><a href="<?php echo base_url('pengusul/Pengabdian/pl');?>">Perbaikan Laporan</a></li>
                             </ul>
                         </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-share-alt"></i><span>Luaran </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?php echo base_url('pengusul/Jurnal/');?>">Jurnal</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Pemakalah');?>">Pemakalah Forum Ilmiah</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Hki');?>">HKI</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Buku');?>">Buku</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Media');?>">Media Masa</a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-trophy"></i><span>Reward </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?php echo base_url('pengusul/Reward');?>">Usulan Reward</a></li>
+                                <li><a href="<?php echo base_url('pengusul/Reward/pr');?>">Perolehan Reward</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="<?php echo $this->logout;?>" class="waves-effect"><i class="fa fa-power-off"></i> <span> Logout </span> </a>
                         </li>
