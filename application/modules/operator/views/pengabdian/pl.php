@@ -3,38 +3,33 @@
     <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="m-t-0 header-title">Laporan pendahuluan</h4>
+                                    <h4 class="m-t-0 header-title">Data Perbaikan Laporan</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data laporan pendahuluan penelitian pendanaan institusi.
+                                        Data Perbaikan Laporan pengabduan kepada masyarakat pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>Upload laporan</th>
+                                            <th></th>
                                             <th>Judul</th>
                                             <th>Ketua</th>
                                             <th>Anggota</th>
+                                            <th>Prodi</th>
                                             <th>Nominal</th>
                                             <th>Luaran</th>
-                                            <th>Reviewer 1</th>
-                                            <th>Reviewer 2</th>
+                                            <th>Kontrak</th>
+                                            <th>Status</th>
                                         </tr>
                                         </thead>
 
 
                                         <tbody>
-                                        <?php if ($hibah != ''){?>
+                                        <?php if ($hibahs != ''){
+                                        foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                        
-                                            <td><?php if($hibah->status_l == '' || $hibah->status_l == 0 ) {?>
-                                                <form action="<?php echo base_url('pengusul/Penelitian/laporan');?>" method="post" enctype="multipart/form-data" >
-                                                <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
-                                                <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
-                                                <input type="file" class="dropify" data-height="90" name="laporan"/>
-                                                <button type="submit" class="btn btn-primary btn-rounded" style="width:100%;">Submit</button>
-                                                </form><?php } else {?>
-                                                <div class="card card-body"><strong>Sudah upload</strong></div><?php } ?>
+                                            <td><a href="<?php echo base_url('operator/Pengabdian/download?file='.$hibah->laporan);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
                                             </td>
                                             <td><?=$hibah->judul; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
@@ -43,31 +38,31 @@
                                                 echo $this->M_user->anggota($anggota->user_id)->name.', ';
                                             }
                                             ?></td>
+                                            <td><?= $hibah->prodi;?></td>
                                             <td>Rp. <?=number_format($hibah->nominal);?></td>
                                             <td><?=$hibah->luaran;?></td>
-                                            <td><?php if ($hibah->reviewer1_id != ''){
-                                                echo $this->M_user->reviewer($hibah->reviewer1_id)->name;
-                                            } else {
-                                                echo '';
-                                            }?>
+                                            <td><?php if ($hibah->kontrak != '') { echo $hibah->kontrak;}?>
                                             </td>
-                                            <td><?php if ($hibah->reviewer2_id != ''){
-                                                echo $this->M_user->reviewer($hibah->reviewer2_id)->name;
-                                            } else {
-                                                echo '';
-                                            }?>
+                                            <td>
+                                            <div class="card bg-pink text-white text-center">
+                                                <div class="card-body">
+                                                <?php switch ($hibah->status_l){
+                                                    case 2 : echo "revisi"; break;
+                                                    case 3 : echo "sudah perbaikan"; break;
+                                                    case 5 : echo "acc"; break;
+                                                }
+                                                ?>
+                                                </div>
+                                            </div>
                                             </td>
-                                            
                                         </tr>
-                                        <?php } ?>
+                                        <?php } }?>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-         </div>
+                        </div>
         <!-- end row -->
-                           
-                            <!-- end col -->
     </div> <!-- container -->
 </div>
 
@@ -82,22 +77,7 @@
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/vfs_fonts.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.html5.min.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.print.min.js"></script>
-<!-- file uploads js -->
-<script src="<?php echo base_url() ?>assets/adminto/assets/plugins/fileuploads/js/dropify.min.js"></script>
-
 <script type="text/javascript">
-            $('.dropify').dropify({
-                messages: {
-                    'default': 'Drag and drop a file here or click',
-                    'replace': 'Drag and drop or click to replace',
-                    'remove': 'Remove',
-                    'error': 'Ooops, something wrong appended.'
-                },
-                error: {
-                    'fileSize': 'The file size is too big (1M max).'
-                }
-            });
-            
             $(document).ready(function () {
 
                 // Default Datatable
@@ -128,5 +108,5 @@
                 table.buttons().container()
                     .appendTo('#datatable-buttons_wrapper .col-md-6:eq(0)');
             });
-            
+
         </script>

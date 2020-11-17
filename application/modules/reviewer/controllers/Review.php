@@ -99,7 +99,9 @@ class Review extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/proposal/';
+                $id    = $this->input->post('id', true);
+                $hibah = $this->M_hibah->getOne($id);
+                $config['upload_path']		= './upload/'.$hibah->kategori.'/proposal/';
                 $config['allowed_types']	= 'doc|docx|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
@@ -114,17 +116,18 @@ class Review extends CI_Controller
                     $f	   = $this->input->post('f', true);
                     $g	   = $this->input->post('g', true);
                     $comment = $this->input->post('comment', true);
-                    $id    = $this->input->post('id', true);
 
                     $total = ((15*(float)$a)+(20*(float)$b)+(15*(float)$c)+(10*(float)$d)+(15*(float)$e)+(15*(float)$f)+(10*(float)$g))/100;
                     $data = array();
-                    $hibah = $this->M_hibah->getOne($id);
+
                     if ($hibah->reviewer1_id == $this->id){
                         $data['nilai1'] = $total;
                         $data['proposal_review1'] = $proposal['file_name'];
+                        @unlink('./upload/'.$hibah->kategori.'/proposal/'.$fileSblumnya->proposal_review1);
                     } else if ($hibah->reviewer2_id == $this->id){
                         $data['nilai2'] = $total;
                         $data['proposal_review2'] = $proposal['file_name'];
+                        @unlink('./upload/'.$hibah->kategori.'/proposal/'.$fileSblumnya->proposal_review2);
                     }
                     $data['comment'] = $hibah->comment.' '.$this->name.' => '.$comment.'.<br>';
                     if ($this->M_hibah->update($data, $id)) {
@@ -169,10 +172,24 @@ class Review extends CI_Controller
         }
     }
 
+    public function hr()
+    {
+        $reviewer = $this->M_user->reviewers();
+        $hibahs = $this->M_hibah->hasilReview();
+        $params = array(
+            'title'	    => 'Usulan Baru',
+            'reviewers' => $reviewer,
+            'hibahs'    => $hibahs,
+            'page'	    => 'hr');
+        $this->template($params);
+    }
+
     public function download()
     {
+        $id = $this->input->get('id', true);
+        $hibah = $this->M_hibah->getOne($id);
         $nama_file = $this->input->get('file', true);
-        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+        force_download('./upload/'.$hibah->kategori.'/proposal/'.$nama_file, NULL);
     }
 
     public function template($params = array())

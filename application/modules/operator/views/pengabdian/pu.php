@@ -3,74 +3,73 @@
     <div class="row">
                             <div class="col-12">
                                 <div class="card-box table-responsive">
-                                    <h4 class="m-t-0 header-title">Data Usulan Baru</h4>
+                                    <h4 class="m-t-0 header-title">Data Perbaikan Usulan</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data penelitian usulan baru pendanaan institusi.
+                                        Data perbaikan usulan pengabdian kepda masyarakat pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>No. SK</th>
-                                            <th>Tanggal SK</th>
-                                            <th>No. Kontrak</th>
+                                            <th>Download</th>
+                                            <th>Judul</th>
                                             <th>Ketua</th>
                                             <th>NIDN / NUPN</th>
-                                            <th>Judul</th>
-                                            <th>N1</th>
-                                            <th>N2</th>
-                                            <th>100%</th>
-                                            <th>60%</th>
-                                            <th>30%</th>
+                                            <th>Anggota</th>
+                                            <th>Prodi</th>
+                                            <th>Nominal</th>
+                                            <th>Luaran</th>
+                                            <th>Kontrak</th>
                                         </tr>
                                         </thead>
 
 
                                         <tbody>
                                         <?php if ($hibahs != ''){
-                                        foreach ($hibahs as $hibah) { $sk = $this->M_Sk->sk($hibah->tahun);?>
+                                        foreach ($hibahs as $hibah) { ?>
                                         <tr>
-                                            <td><?php if ($sk != ''){echo $sk->nomor;} ?></td>
-                                            <td><?php if ($sk != ''){echo $sk->tanggal;} ?></td>
-                                            <td><?=$hibah->kontrak; ?></td>
+                                            <td><a href="<?php echo base_url('operator/Pengabdian/download?file='.$hibah->proposal);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
+                                            </td>
+                                            <td><?=$hibah->judul; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->username;?></td>
-                                            <td><?=$hibah->judul; ?></td>
-                                            <td><?=$hibah->nilai1;?></td>
-                                            <td><?=$hibah->nilai2;?></td>
-                                            <td>Rp. <?=number_format($hibah->nominal);?>
-                                            <?php if ($hibah->status_p == 1) { ?>
+                                            <td><?php
+                                            foreach ($this->M_anggota->anggota($hibah->id) as $anggota){
+                                                echo $this->M_user->anggota($anggota->user_id)->name.', ';
+                                            }
+                                            ?></td>
+                                            <td><?= $hibah->prodi;?></td>
+                                            <td>Rp. <?=number_format($hibah->nominal);?></td>
+                                            <td><?=$hibah->luaran;?></td>
+                                            <td><?php if ($hibah->kontrak != '') { echo $hibah->kontrak;}?>
                                             <a href="#edit-modal-<?php echo $hibah->id; ?>-1" class="btn btn-warning btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i>
                                             </a>
-                                            <?php } ?>
                                             </td>
-                                            <td><?=floatval($hibah->nominal)*60/100;?></td>
-                                            <td><?=floatval($hibah->nominal)*30/100;?></td>
                                             
-                                            <!-- Modal set reviewer 1-->
-                                            <div id="edit-modal-<?php echo $hibah->id; ?>-1" class="modal-demo">
+                                            
+                                                <!-- Modal set reviewer 1-->
+                                                <div id="edit-modal-<?php echo $hibah->id; ?>-1" class="modal-demo">
                                                     <button type="button" class="close" onclick="Custombox.close();">
                                                         <span>&times;</span><span class="sr-only">Close</span>
                                                     </button>
-                                                    <h4 class="custom-modal-title">Dana hibah</h4>
+                                                    <h4 class="custom-modal-title">Set No. Kontrak</h4>
                                                     <div class="custom-modal-text">
-                                                        <form method="post" action="<?php echo base_url('keuangan/Penelitian/set_nominal');?>" data-parsley-validate novalidate enctype="multipart/form-data">
-                                                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
-                                                            value="<?=$this->security->get_csrf_hash();?>" style="display: none">
-                                                            <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
+                                                        <form action="<?php echo base_url('operator/Pengabdian/set_kontrak');?>" data-parsley-validate novalidate method="post">
+                                                        <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
+                                                        value="<?=$this->security->get_csrf_hash();?>" style="display: none">
+                                                        <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
+
                                                             
-                                                            <div class="form-group row">
-                                                                <label class="col-sm-9 col-form-label text-left"><strong>Masukan nominal yang disetujui :</strong>
-                                                                </label>
-                                                                <div class="col-sm-3">
-                                                                    <input type="number" class="form-control" name="nominal" required/>
-                                                                </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="kontrak">No. Kontrak</label>
+                                                                <input type="text" class="form-control" placeholder="input nomor kontrak" name="kontrak">
                                                             </div>
 
                                                             <div class="form-group text-right m-b-0">
-                                                                <button class="btn btn-primary btn-rounded waves-effect waves-light" type="submit">
+                                                                <button class="btn btn-primary waves-effect btn-rounded waves-light" type="submit">
                                                                     Submit
                                                                 </button>
                                                                 <button type="reset" class="btn btn-secondary btn-rounded waves-effect waves-light m-l-5">
@@ -81,6 +80,9 @@
                                                         </form>
                                                     </div>
                                                 </div>
+
+                                                <!-- Modal set reviewer 2-->
+                                            
                                                 
                                         </tr>
                                         <?php } }?>
@@ -104,22 +106,7 @@
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/vfs_fonts.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.html5.min.js"></script>
 <script src="<?php echo base_url()?>assets/adminto/assets/plugins/datatables/buttons.print.min.js"></script>
-<!-- file uploads js -->
-<script src="<?php echo base_url() ?>assets/adminto/assets/plugins/fileuploads/js/dropify.min.js"></script>
 <script type="text/javascript">
-            // Dropify
-            $('.dropify').dropify({
-                     messages: {
-                    'default': 'Drag and drop a file here or click',
-                    'replace': 'Drag and drop or click to replace',
-                    'remove': 'Remove',
-                    'error': 'Ooops, something wrong appended.'
-                },
-                error: {
-                    'fileSize': 'The file size is too big (1M max).'
-                }
-            });
-
             $(document).ready(function () {
 
                 // Default Datatable

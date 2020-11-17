@@ -50,6 +50,48 @@ class M_hibah extends CI_Model
         $data = $this->db->get('hibahs')->result();
         return (count( (array)$data) > 0) ? $data : false;
 	}
+
+    public function usulanBaru2()
+    {
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_p', 1);
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
+
+	public function perbaikanUsulan2()
+	{
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_p', 5);
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
+
+	public function laporanPendahuluan2()
+	{
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_l', 1);
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
+
+	public function perbaikanLaporan2()
+	{
+		$this->db->where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_l', 2);
+		$this->db->or_where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_l', 3);
+		$this->db->or_where('tahun', $this->semester);
+		$this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_l', 5);
+        $data = $this->db->get('hibahs')->result();
+        return (count( (array)$data) > 0) ? $data : false;
+	}
 	
 	public function update($data, $id)
     {

@@ -5,7 +5,7 @@
                                 <div class="card-box table-responsive">
                                     <h4 class="m-t-0 header-title">Data Usulan Baru</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data usulan baru pendanaan institusi.
+                                        Data usulan baru penelitian pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">

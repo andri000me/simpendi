@@ -9,7 +9,7 @@
     }
 </style>
 <p style="text-align: center;"><strong>HALAMAN PENGESAHAN</strong></p>
-<p style="text-align: center;"><strong>LAPORAN PENGABDIAN KEPADAMASYARAKAT</strong><strong>&nbsp;</strong></p>
+<p style="text-align: center;"><strong>PROPOSAL PENGABDIAN KEPADA MASYARAKAT</strong><strong>&nbsp;</strong></p>
 <table style="width: 679px; height: 924px;">
 <tbody>
 <tr>

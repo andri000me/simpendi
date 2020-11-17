@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Penelitian extends CI_Controller
+class Pengabdian extends CI_Controller
 {
     public function __construct()
     {
@@ -40,10 +40,10 @@ class Penelitian extends CI_Controller
         $tahun = $this->M_tahun->all();
         $anggota = $this->M_user->anggotas($this->id);
         $params = array(
-            'title'	    => 'Usulan Penelitian',
+            'title'	    => 'Usulan Pengabdian',
             'anggotas'  => $anggota,
             'tahuns'    => $tahun,
-            'page'	    => 'penelitian/ub');
+            'page'	    => 'pengabdian/ub');
         $this->template($params);
     }
 
@@ -87,7 +87,7 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/proposal/';
+                $config['upload_path']		= './upload/pengabdian/proposal/';
                 $config['allowed_types']	= 'doc|docx|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
@@ -97,7 +97,7 @@ class Penelitian extends CI_Controller
                     $data['proposal']	= $proposal['file_name'];
                     $data['user_id']	=	$this->id;
                     $data['prodi']	    =	$this->prodi;
-                    $data['kategori']	=	'penelitian';
+                    $data['kategori']	=	'pengabdian';
                     $data['judul']	    =	$this->input->post('judul', true);
                     $data['tahun']	    =	$this->input->post('tahun', true);
                     $data['nominal']	=	$this->input->post('nominal', true);
@@ -149,14 +149,14 @@ class Penelitian extends CI_Controller
     {
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
-        $hibah = $this->M_hibah->revisi1();
+        $hibah = $this->M_hibah->revisi2();
         if ($hibah != ''){if ($hibah->status_p == 2 || $hibah->status_p == 4){$this->notifikasi->comment($hibah->comment);}}
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
-            'page'	    => 'penelitian/pu');
+            'page'	    => 'pengabdian/pu');
         $this->template($params);
     }
 
@@ -164,13 +164,13 @@ class Penelitian extends CI_Controller
     {
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
-        $hibah = $this->M_hibah->laporan1();
+        $hibah = $this->M_hibah->laporan2();
         $params = array(
             'title'	    => 'Laporan pendahuluan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
-            'page'	    => 'penelitian/lp');
+            'page'	    => 'pengabdian/lp');
         $this->template($params);
     }
 
@@ -204,7 +204,7 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['proposal']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/proposal/';
+                $config['upload_path']		= './upload/pengabdian/proposal/';
                 $config['allowed_types']	= 'docx|doc|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
@@ -218,8 +218,8 @@ class Penelitian extends CI_Controller
                     $data['luaran']	    =	$this->input->post('luaran', true);
                     $data['status_p']	=	3;
 
-                    $fileSblumnya = $this->M_hibah->revisi1();
-                    @unlink('./upload/penelitian/proposal/'.$fileSblumnya->proposal);
+                    $fileSblumnya = $this->M_hibah->revisi2();
+                    @unlink('./upload/pengabdian/proposal/'.$fileSblumnya->proposal);
 
                     if ($this->M_hibah->update($data, $id)) {
                         
@@ -263,7 +263,7 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['laporan']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/laporan/';
+                $config['upload_path']		= './upload/pengabdian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
@@ -307,14 +307,14 @@ class Penelitian extends CI_Controller
     {
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
-        $hibah = $this->M_hibah->revisi_laporan1();
+        $hibah = $this->M_hibah->revisi_laporan2();
         if ($hibah != ''){if ($hibah->status_l == 2){$this->notifikasi->comment($hibah->comment);}}
         $params = array(
             'title'	    => 'Perbaikan Laporan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
-            'page'	    => 'penelitian/pl');
+            'page'	    => 'pengabdian/pl');
         $this->template($params);
 
     }
@@ -332,7 +332,7 @@ class Penelitian extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             if ($_FILES['laporan']['size'] > 0) {
-                $config['upload_path']		= './upload/penelitian/laporan/';
+                $config['upload_path']		= './upload/pengabdian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
@@ -343,8 +343,8 @@ class Penelitian extends CI_Controller
                     $id     	        =   $this->input->post('id', true);
                     $data['status_l']	=	3;
 
-                    $fileSblumnya = $this->M_hibah->revisi_laporan1();
-                    @unlink('./upload/penelitian/laporan/'.$fileSblumnya->laporan);
+                    $fileSblumnya = $this->M_hibah->revisi_laporan2();
+                    @unlink('./upload/pengabdian/laporan/'.$fileSblumnya->laporan);
 
                     if ($this->M_hibah->update($data, $id)) {
                         
@@ -378,7 +378,7 @@ class Penelitian extends CI_Controller
     public function download()
     {
         $nama_file = $this->input->get('file', true);
-        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+        force_download('./upload/pengabdian/proposal/'.$nama_file, NULL);
     }
 
     public function pengesahan()
@@ -386,18 +386,18 @@ class Penelitian extends CI_Controller
         $tahun = $this->M_tahun->all();
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
-        $hibah = $this->M_hibah->revisi1();
+        $hibah = $this->M_hibah->revisi2();
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
             'tahuns'    => $tahun,
-            'page'	    => 'penelitian/pu');
+            'page'	    => 'pengabdian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
-        $data = $this->load->view('penelitian/lembarPengesahan', $params, TRUE);
+        $data = $this->load->view('pengabdian/lembarPengesahan', $params, TRUE);
         $mpdf->WriteHTML($data);
         $mpdf->Output();
     }
@@ -407,18 +407,18 @@ class Penelitian extends CI_Controller
         $tahun = $this->M_tahun->all();
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
-        $hibah = $this->M_hibah->revisi1();
+        $hibah = $this->M_hibah->revisi2();
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
             'tahuns'    => $tahun,
-            'page'	    => 'penelitian/pu');
+            'page'	    => 'pengabdian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
         $mpdf = new \Mpdf\Mpdf();
         $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
-        $data = $this->load->view('penelitian/lembarPengesahan2', $params, TRUE);
+        $data = $this->load->view('pengabdian/lembarPengesahan2', $params, TRUE);
         $mpdf->WriteHTML($data);
         $mpdf->Output();
     }

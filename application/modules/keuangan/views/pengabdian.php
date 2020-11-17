@@ -5,7 +5,7 @@
                                 <div class="card-box table-responsive">
                                     <h4 class="m-t-0 header-title">Data Usulan Baru</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data penelitian usulan baru pendanaan institusi.
+                                        Data pengabdian kepada masyarakat usulan baru pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -56,7 +56,7 @@
                                                     </button>
                                                     <h4 class="custom-modal-title">Dana hibah</h4>
                                                     <div class="custom-modal-text">
-                                                        <form method="post" action="<?php echo base_url('keuangan/Penelitian/set_nominal');?>" data-parsley-validate novalidate enctype="multipart/form-data">
+                                                        <form method="post" action="<?php echo base_url('keuangan/Pengabdian/set_nominal');?>" data-parsley-validate novalidate enctype="multipart/form-data">
                                                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                                             value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                             <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">

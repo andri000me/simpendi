@@ -8,42 +8,100 @@ class M_hibah extends CI_Model
         return ($this->db->insert('hibahs', $data)) ? true : false ;
     }
 
-    public function revisi()
+    public function revisi1()
     {
         $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
 		$this->db->where('status_p', 2);
         $this->db->where('user_id', $this->id);
         $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 3);
         $this->db->where('user_id', $this->id);
         $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 4);
         $this->db->where('user_id', $this->id);
         $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 5);
         $this->db->where('user_id', $this->id);
         $data = $this->db->get('hibahs')->row();
         return (count( (array)$data) > 0) ? $data : false;
     }
 
-    public function laporan()
+    public function laporan1()
     {
         $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 5);
         $this->db->where('user_id', $this->id);
         $data = $this->db->get('hibahs')->row();
         return (count( (array)$data) > 0) ? $data : false;
     }
 
-    public function revisi_laporan()
+    public function revisi_laporan1()
     {
         $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 2);
         $this->db->where('user_id', $this->id);
         $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
         $this->db->where('status_p', 3);
         $this->db->where('user_id', $this->id);
         $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'penelitian');
+        $this->db->where('status_p', 5);
+        $this->db->where('user_id', $this->id);
+        $data = $this->db->get('hibahs')->row();
+        return (count( (array)$data) > 0) ? $data : false;
+    }
+
+    public function revisi2()
+    {
+        $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+		$this->db->where('status_p', 2);
+        $this->db->where('user_id', $this->id);
+        $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 3);
+        $this->db->where('user_id', $this->id);
+        $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 4);
+        $this->db->where('user_id', $this->id);
+        $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 5);
+        $this->db->where('user_id', $this->id);
+        $data = $this->db->get('hibahs')->row();
+        return (count( (array)$data) > 0) ? $data : false;
+    }
+
+    public function laporan2()
+    {
+        $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 5);
+        $this->db->where('user_id', $this->id);
+        $data = $this->db->get('hibahs')->row();
+        return (count( (array)$data) > 0) ? $data : false;
+    }
+
+    public function revisi_laporan2()
+    {
+        $this->db->where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 2);
+        $this->db->where('user_id', $this->id);
+        $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
+        $this->db->where('status_p', 3);
+        $this->db->where('user_id', $this->id);
+        $this->db->or_where('tahun', $this->semester);
+        $this->db->where('kategori', 'pengabdian');
         $this->db->where('status_p', 5);
         $this->db->where('user_id', $this->id);
         $data = $this->db->get('hibahs')->row();

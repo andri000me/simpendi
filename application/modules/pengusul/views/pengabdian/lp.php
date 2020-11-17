@@ -5,7 +5,7 @@
                                 <div class="card-box table-responsive">
                                     <h4 class="m-t-0 header-title">Laporan pendahuluan</h4>
                                     <p class="text-muted font-14 m-b-30">
-                                        Data laporan pendahuluan penelitian pendanaan institusi.
+                                        Data laporan pendahuluan pengabdian kepada masyarakat pendanaan institusi.
                                     </p>
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -28,7 +28,7 @@
                                         <tr>
                                         
                                             <td><?php if($hibah->status_l == '' || $hibah->status_l == 0 ) {?>
-                                                <form action="<?php echo base_url('pengusul/Penelitian/laporan');?>" method="post" enctype="multipart/form-data" >
+                                                <form action="<?php echo base_url('pengusul/Pengabdian/laporan');?>" method="post" enctype="multipart/form-data" >
                                                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                 <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
                                                 <input type="file" class="dropify" data-height="90" name="laporan"/>
