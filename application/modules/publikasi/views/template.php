@@ -39,7 +39,6 @@
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/multiselect/css/multi-select.css"  rel="stylesheet" type="text/css" />
     <!-- form Uploads -->
     <link href="<?php echo base_url()?>assets/adminto/assets/plugins/fileuploads/css/dropify.min.css" rel="stylesheet" type="text/css" />
-
     <script
         src="<?php echo base_url()?>assets/adminto/assets/js/modernizr.min.js">
     </script>
@@ -133,41 +132,23 @@
                     <ul>
                         <li class="text-muted menu-title">Navigation</li>
                         <li>
-                            <a href="<?php echo base_url($this->role);?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
-                        </li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-search"></i><span>Penelitian </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('pengusul/Penelitian');?>">Usulan Baru</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Penelitian/pu');?>">Perbaikan Usulan</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Penelitian/lp');?>">Laporan Pendahuluan</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Penelitian/pl');?>">Perbaikan Laporan</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-spin fa-spinner"></i><span>Pengabdian </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('pengusul/Pengabdian');?>">Usulan Baru</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Pengabdian/pu');?>">Perbaikan Usulan</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Pengabdian/lp');?>">Laporan Pendahuluan</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Pengabdian/pl');?>">Perbaikan Laporan</a></li>
-                            </ul>
+                            <a href="<?php echo base_url('operator');?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-share-alt"></i><span>Luaran </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('pengusul/Jurnal/');?>">Jurnal</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Pemakalah');?>">Pemakalah Forum Ilmiah</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Hki');?>">HKI</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Buku');?>">Buku</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Media');?>">Media Masa</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Jurnal/');?>">Jurnal</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Pemakalah');?>">Pemakalah Forum Ilmiah</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Hki');?>">HKI</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Buku');?>">Buku</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Media');?>">Media Masa</a></li>
                             </ul>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-trophy"></i><span>Reward </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="<?php echo base_url('pengusul/Reward/insert');?>">Usulan Reward</a></li>
-                                <li><a href="<?php echo base_url('pengusul/Reward/');?>">Perolehan Reward</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Reward/insert');?>">Usulan Reward</a></li>
+                                <li><a href="<?php echo base_url('publikasi/Reward/');?>">Perolehan Reward</a></li>
                             </ul>
                         </li>
                         <li>
@@ -329,6 +310,7 @@
     <!-- Modal-Effect -->
     <script src="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/custombox.min.js"></script>
     <script src="<?php echo base_url()?>assets/adminto/assets/plugins/custombox/dist/legacy.min.js"></script>
+
 </body>
 
 </html>

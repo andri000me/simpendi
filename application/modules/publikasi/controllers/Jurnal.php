@@ -11,7 +11,7 @@ class Jurnal extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'pengusul')) {
+        if (empty($this->login) && ($this->role != 'publikasi')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -33,10 +33,12 @@ class Jurnal extends CI_Controller
     }
     public function index()
     {
+        $users = $this->M_user->anggotas();
         $data = $this->M_jurnal->all();
         $params = array(
             'title'	=> 'Jurnal',
             'datas' => $data,
+            'users' => $users,
             'page'	=> 'luaran/jurnal');
         $this->template($params);
     }
@@ -159,6 +161,11 @@ class Jurnal extends CI_Controller
     {
         $config_rules = array(
             array(
+                'field' => 'user_id',
+                'label' => 'User ID',
+                'rules' => 'required|numeric'
+            ),
+            array(
                 'field' => 'tahun',
                 'label' => 'Tahun',
                 'rules' => 'required|numeric'
@@ -235,7 +242,7 @@ class Jurnal extends CI_Controller
                     $data['volume']	=	$this->input->post('volume', true);
                     $data['nomor']	=	$this->input->post('nomor', true);
                     $data['halaman']=	$this->input->post('halamana', true).'-'.$this->input->post('halamanz', true);
-                    $data['user_id']=	$this->id;
+                    $data['user_id']=	$this->input->post('user_id', true);
                     $data['user_id2']=	$this->input->post('penulis2', true);
                     $data['user_id3']=	$this->input->post('penulis3', true);
                     $id              =  $this->input->post('id', true);
@@ -269,7 +276,7 @@ class Jurnal extends CI_Controller
                 $data['volume']	=	$this->input->post('volume', true);
                 $data['nomor']	=	$this->input->post('nomor', true);
                 $data['halaman']=	$this->input->post('halamana', true).'-'.$this->input->post('halamanz', true);
-                $data['user_id']=	$this->id;
+                $data['user_id']=	$this->input->post('user_id', true);
                 $data['user_id2']=	$this->input->post('penulis2', true);
                 $data['user_id3']=	$this->input->post('penulis3', true);
                 $id              =  $this->input->post('id', true);
@@ -313,7 +320,7 @@ class Jurnal extends CI_Controller
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'pengusul') {
+            if ($this->role == 'publikasi') {
                 $params['menu']	= 'menu/menu';
             } else {
                 redirect('Login', 'refresh');

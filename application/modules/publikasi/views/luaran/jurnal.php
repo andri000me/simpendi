@@ -34,7 +34,7 @@
                                         <?php if ($datas != ''){
                                         foreach ($datas as $data) { ?>
                                         <tr>
-                                            <td><a href="<?php echo base_url('pengusul/Jurnal/download?file='.$data->file);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
+                                            <td><a href="<?php echo base_url('publikasi/Jurnal/download?file='.$data->file);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-pdf-o"></i></a>
                                             </td>
                                             <td><?=$data->tahun; ?></td>
@@ -56,7 +56,7 @@
                                                 <a href="#edit-modal-<?php echo $data->id; ?>" class="btn btn-warning btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i></a>
-                                                <a href="<?php echo base_url('pengusul/Jurnal/delete?id='.$data->id);?>" class="btn btn-danger btn-rounded waves-effect waves-light"
+                                                <a href="<?php echo base_url('publikasi/Jurnal/delete?id='.$data->id);?>" class="btn btn-danger btn-rounded waves-effect waves-light"
                                                 onclick="return confirm('Beneran hapus <?php echo $data->judul; ?> ?')"><i class="fa fa-user-times"></i></a>
                                             </td>
                                             <!-- Modal -->
@@ -66,7 +66,7 @@
                                                     </button>
                                                     <h4 class="custom-modal-title">Edit Jurnal</h4>
                                                     <div class="custom-modal-text">
-                                                        <form action="<?php echo base_url('pengusul/Jurnal/update');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                                                        <form action="<?php echo base_url('publikasi/Jurnal/update');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
                                                         <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                                         value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                         <input type="hidden" name="id" value="<?php echo $data->id; ?>">
@@ -171,7 +171,7 @@
                                         </button>
                                         <h4 class="custom-modal-title">Tambah Jurnal</h4>
                                         <div class="custom-modal-text">
-                                            <form action="<?php echo base_url('pengusul/Jurnal/store');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
+                                            <form action="<?php echo base_url('publikasi/Jurnal/store');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                             value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 
@@ -225,20 +225,30 @@
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="name">Nama Penulis 1</label>
-                                                    <input type="text" parsley-trigger="change" readonly
-                                                        value="<?=$this->name;?>" class="form-control" >
-                                                </div>
-                                                <div class="form-group text-left">
-                                                    <label for="nidn">NIDN Penulis 1</label>
-                                                    <input type="text" parsley-trigger="change" readonly
-                                                        value="<?=$this->username;?>" class="form-control" >
+                                                    <select class="form-control" name="user_id">
+                                                        <option>---</option>
+                                                        <?php if ($users != ''){
+                                                        foreach ($users as $user) { ?>
+                                                        <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                        <?php } }?>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="halaman">Co Author</label>
-                                                    <input type="number" name="penulis2" parsley-trigger="change" required
-                                                        placeholder="NIDN" class="form-control" id="penulis2">
-                                                    <input type="number" name="penulis3" parsley-trigger="change"
-                                                        placeholder="NIDN" class="form-control" id="penulis3">
+                                                    <select class="form-control" name="penulis2">
+                                                        <option>---</option>
+                                                        <?php if ($users != ''){
+                                                        foreach ($users as $user) { ?>
+                                                        <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                        <?php } }?>
+                                                    </select>
+                                                    <select class="form-control" name="penulis3">
+                                                        <option>---</option>
+                                                        <?php if ($users != ''){
+                                                        foreach ($users as $user) { ?>
+                                                        <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                        <?php } }?>
+                                                    </select>
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="url">Url Artikel</label>

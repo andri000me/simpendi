@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Pengusul extends CI_Controller
+class Publikasi extends CI_Controller
 {
     public function __construct()
     {
@@ -11,7 +11,7 @@ class Pengusul extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'pengusul')) {
+        if (empty($this->login) && ($this->role != 'publikasi')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -38,10 +38,10 @@ class Pengusul extends CI_Controller
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'pengusul') {
+            if ($this->role == 'publikasi') {
                 $params['menu']	= 'menu/menu';
             } else {
-                redirect('Login', 'refresh');
+                redirect('Loging', 'refresh');
             }
             $this->load->view('template', $params);
         } else {
