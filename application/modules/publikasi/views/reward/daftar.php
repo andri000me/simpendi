@@ -12,6 +12,7 @@
                                         <thead>
                                         <tr>
                                             <th>Unduh</th>
+                                            <th>Pengusul</th>
                                             <th>Judul</th>
                                             <th>Nama Jurnal</th>
                                             <th>Penerbit</th>
@@ -30,6 +31,7 @@
                                             <td><a href="<?php echo base_url('publikasi/Reward/download?file='.$jurnal->file);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-pdf-o"></i></a>
                                             </td>
+                                            <td><?=$this->M_user->ketua($data->user_id)->name;?></td>
                                             <td><?=$jurnal->judul; ?></td>
                                             <td><?=$jurnal->nama; ?></td>
                                             <td><?=$data->penerbit; ?></td>
@@ -58,13 +60,13 @@
                                                         <div class="form-group row">
                                                             <label class="col-2 col-form-label">Nama</label>
                                                             <div class="col-10">
-                                                                <input type="text" class="form-control" value="<?= $this->name;?>" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label class="col-2 col-form-label">NIDN/NIPY</label>
-                                                            <div class="col-10">
-                                                                <input type="text" class="form-control" value="<?= $this->username;?>" readonly>
+                                                                <select class="form-control" name="user_id">
+                                                                <option value="<?=$this->M_user->ketua($data->user_id)->id;?>" selected><?=$this->M_user->ketua($data->user_id)->name;?></option>
+                                                                    <?php if ($users != ''){
+                                                                    foreach ($users as $user) { ?>
+                                                                    <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                                    <?php } }?>
+                                                                </select>
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">

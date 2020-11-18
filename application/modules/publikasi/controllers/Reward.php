@@ -34,12 +34,14 @@ class Reward extends CI_Controller
     }
     public function index()
     {
+        $users = $this->M_user->anggotas();
         $jurnals = $this->M_jurnal->jurnal();
         $data = $this->M_reward->all();
         $params = array(
             'title'	    => 'Reward',
             'datas'     => $data,
             'jurnals'   => $jurnals,
+            'users'     => $users,
             'page'	    => 'reward/daftar');
         $this->template($params);
     }

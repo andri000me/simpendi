@@ -124,7 +124,7 @@ class Jurnal extends CI_Controller
                     $data['volume']	=	$this->input->post('volume', true);
                     $data['nomor']	=	$this->input->post('nomor', true);
                     $data['halaman']=	$this->input->post('halamana', true).'-'.$this->input->post('halamanz', true);
-                    $data['user_id']=	$this->id;
+                    $data['user_id']=	$this->input->post('user_id', true);
                     $data['user_id2']=	$this->input->post('penulis2', true);
                     $data['user_id3']=	$this->input->post('penulis3', true);
 

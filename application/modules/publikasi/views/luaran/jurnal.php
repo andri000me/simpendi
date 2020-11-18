@@ -121,20 +121,34 @@
                                                         </div>
                                                         <div class="form-group text-left">
                                                             <label for="name">Nama Penulis 1</label>
-                                                            <input type="text" parsley-trigger="change" readonly
-                                                                value="<?=$this->name;?>" class="form-control" >
-                                                        </div>
-                                                        <div class="form-group text-left">
-                                                            <label for="nidn">NIDN Penulis 1</label>
-                                                            <input type="text" parsley-trigger="change" readonly
-                                                                value="<?=$this->username;?>" class="form-control" >
+                                                            <select class="form-control" name="user_id">
+                                                            <option value="<?=$this->M_user->ketua($data->user_id)->id;?>" selected><?=$this->M_user->ketua($data->user_id)->name;?></option>
+                                                                <?php if ($users != ''){
+                                                                foreach ($users as $user) { ?>
+                                                                <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                                <?php } }?>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group text-left">
                                                             <label for="halaman">Co Author</label>
-                                                            <input type="number" name="penulis2" parsley-trigger="change" required
-                                                            value="<?=$data->user_id2;?>" class="form-control" >
-                                                            <input type="number" name="penulis3" parsley-trigger="change"
-                                                            value="<?=$data->user_id3;?>" class="form-control" >
+                                                            <select class="form-control" name="penulis2">
+                                                            <option value="<?=$this->M_user->ketua($data->user_id2)->id;?>" selected><?=$this->M_user->ketua($data->user_id2)->name;?></option>
+                                                                <?php if ($users != ''){
+                                                                foreach ($users as $user) { ?>
+                                                                <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                                <?php } }?>
+                                                            </select>
+                                                            <select class="form-control" name="penulis3">
+                                                            <?php if ($data->user_id3 > 0 ){?>
+                                                                <option value="<?=$this->M_user->ketua($data->user_id3)->id;?>" selected><?=$this->M_user->ketua($data->user_id3)->name;?></option>
+                                                                <?php } else {?>
+                                                                <option value="">---</option>
+                                                                <?php } ?>
+                                                                <?php if ($users != ''){
+                                                                foreach ($users as $user) { ?>
+                                                                <option value="<?=$user->id;?>"><?=$user->name;?></option>
+                                                                <?php } }?>
+                                                            </select>
                                                         </div>
                                                         <div class="form-group text-left">
                                                             <label for="url">Url Artikel</label>
