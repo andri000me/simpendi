@@ -43,15 +43,11 @@
                                             <td><?=$data->nama; ?></td>
                                             <td><?=$data->issn; ?></td>
                                             <td><?=$data->volume; ?></td>
+                                            <td><?=$data->nomor; ?></td>
                                             <td><?=$data->halaman; ?></td>
-                                            <td><?= $this->M_user->ketuaj($hibah->user_id)->name;?>(
-                                                <?= $this->M_user->ketuaj($hibah->user_id)->username;?>),&nbsp;
-                                                <?php
-                                                foreach ($this->M_anggota->anggotaj($hibah->id) as $anggota){
-                                                    echo $this->M_user->anggotaj($anggota->user_id)->name.'('.
-                                                        $this->M_user->anggotaj($anggota->user_id)->username.')';
-                                                }
-                                            ?></td>
+                                            <td><?= $this->M_user->ketua($data->user_id)->name;?>(
+                                                <?= $this->M_user->ketua($data->user_id)->username;?>),&nbsp;
+                                                </td>
                                             <td><?= $data->url;?></td>
                                             <td>
                                                 <a href="#edit-modal-<?php echo $data->id; ?>" class="btn btn-warning waves-effect waves-light" 
@@ -75,12 +71,12 @@
                                                             <div class="form-group text-left">
                                                                 <label for="nama">Nama</label>
                                                                 <input type="text" name="nama" parsley-trigger="change" required
-                                                                    placeholder="Masukan Nama" class="form-control" value="<?=$data->name;?>">
+                                                                    placeholder="Masukan Nama" class="form-control" value="">
                                                             </div>
                                                             <div class="form-group text-left">
                                                                 <label for="username">Username</label>
                                                                 <input type="text" name="username" parsley-trigger="change" required
-                                                                    placeholder="Masukan Username" class="form-control" value="<?=$data->username;?>">
+                                                                    placeholder="Masukan Username" class="form-control" value="">
                                                             </div>
                                                             <div class="form-group text-left">
                                                                 <label for="role">Role</label>
@@ -151,7 +147,7 @@
                                         </button>
                                         <h4 class="custom-modal-title">Tambah Jurnal</h4>
                                         <div class="custom-modal-text">
-                                            <form action="<?php echo base_url('pengusul/Jurnal/store');?>" data-parsley-validate novalidate method="post">
+                                            <form action="<?php echo base_url('pengusul/Jurnal/store');?>" data-parsley-validate novalidate method="post" enctype="multipart/form-data">
                                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                             value="<?=$this->security->get_csrf_hash();?>" style="display: none">
 
@@ -162,7 +158,7 @@
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="jenis">Jenis Publikasi</label>
-                                                    <select class="custom-select" name="role" id="role">
+                                                    <select class="custom-select" name="jenis" id="jenis">
                                                         <option selected > - Pilih Jenis Publikasi - </option>
                                                         <option value="internasional">Internasional</option>
                                                         <option value="nasional terakreditasi">Nasional Terakreditasi</option>
@@ -196,10 +192,12 @@
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="halaman">Halaman Artikel</label>
+                                                    <div class="row">
                                                     <input type="number" name="halamana" parsley-trigger="change" required
-                                                         class="form-control" id="halamana">
+                                                         class="form-control" id="halamana" style="width : 75px;"> &nbsp; sampai &nbsp;
                                                     <input type="number" name="halamanz" parsley-trigger="change" required
-                                                         class="form-control" id="halamanz">
+                                                         class="form-control" id="halamanz" style="width : 75px;">
+                                                    </div>
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <label for="name">Nama Penulis 1</label>
@@ -215,7 +213,7 @@
                                                     <label for="halaman">Co Author</label>
                                                     <input type="number" name="penulis2" parsley-trigger="change" required
                                                         placeholder="NIDN" class="form-control" id="penulis2">
-                                                    <input type="number" name="penulis3" parsley-trigger="change" required
+                                                    <input type="number" name="penulis3" parsley-trigger="change"
                                                         placeholder="NIDN" class="form-control" id="penulis3">
                                                 </div>
                                                 <div class="form-group text-left">
