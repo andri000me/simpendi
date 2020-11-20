@@ -18,6 +18,8 @@
                                             <th>Nama</th>
                                             <th>Unit</th>
                                             <th>Role</th>
+                                            <th>NIPY</th>
+                                            <th>NIDN</th>
                                             <th>Aksi</th>
                                         </tr>
                                         </thead>
@@ -30,10 +32,12 @@
                                             <td><?php echo $data->name; ?></td>
                                             <td><?php echo $data->prodi; ?></td>
                                             <td><?php echo $data->role; ?></td>
-                                            <td><a href="#edit-modal-<?php echo $data->id; ?>" class="btn btn-warning waves-effect waves-light" 
+                                            <td><?php echo $data->nipy; ?></td>
+                                            <td><?php echo $data->nidn; ?></td>
+                                            <td><a href="#edit-modal-<?php echo $data->id; ?>" class="btn btn-warning btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
                                                     <i class="fa fa-edit"></i></a>
-                                                <a href="<?php echo base_url('operator/User/delete?id='.$data->id);?>" class="btn btn-danger waves-effect waves-light"
+                                                <a href="<?php echo base_url('operator/User/delete?id='.$data->id);?>" class="btn btn-rounded btn-danger waves-effect waves-light"
                                                 onclick="return confirm('Beneran hapus <?php echo $data->name; ?> ?')"><i class="fa fa-user-times"></i></a>
                                                 
                                                 <!-- Modal -->
@@ -89,6 +93,41 @@
                                                                     <option value="elektronika">Elektronika</option>
                                                                     <option value="dkv">DKV</option>
                                                                 </select>
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">NIPY</label>
+                                                                <input type="text" name="nipy" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->nipy;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">NIDN</label>
+                                                                <input type="text" name="nidn" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->nidn;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Disiplin Ilmu</label>
+                                                                <input type="text" name="disiplin_ilmu" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->disiplin_ilmu;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Pangkat / Golongan</label>
+                                                                <input type="text" name="pangkat_golongan" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->pangkat_golongan;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Jabatan Fungsional</label>
+                                                                <input type="text" name="jabatan_fungsional" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->jabatan_fungsional;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Jabatan Struktural</label>
+                                                                <input type="text" name="jabatan_struktural" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->jabatan_struktural;?>">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Kontak</label>
+                                                                <input type="text" name="kontak" parsley-trigger="change" required
+                                                                     class="form-control" value="<?=$data->kontak;?>">
                                                             </div>
                                                             <div class="form-group text-left">
                                                                 <label for="password">Password</label>
@@ -175,6 +214,41 @@
                                                         <option value="dkv">DKV</option>
                                                     </select>
                                                 </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">NIPY</label>
+                                                                <input type="text" name="nipy" parsley-trigger="change" required
+                                                                    placeholder="masukan nipy" class="form-control" >
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">NIDN</label>
+                                                                <input type="text" name="nidn" parsley-trigger="change" required
+                                                                    placeholder="masukan nidn" class="form-control" >
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Disiplin Ilmu</label>
+                                                                <input type="text" name="disiplin_ilmu" parsley-trigger="change" required
+                                                                    placeholder="masukan disiplin ilmu" class="form-control" >
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Pangkat / Golongan</label>
+                                                                <input type="text" name="pangkat_golongan" parsley-trigger="change" required
+                                                                    placeholder="masukan pangkat / golongan" class="form-control" >
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Jabatan Fungsional</label>
+                                                                <input type="text" name="jabatan_fungsional" parsley-trigger="change" required
+                                                                    placeholder="masukan jabatan fungsional" class="form-control" >
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Jabatan Struktural</label>
+                                                                <input type="text" name="jabatan_struktural" parsley-trigger="change" required
+                                                                    placeholder="masukan jabatan struktural" class="form-control">
+                                                            </div>
+                                                            <div class="form-group text-left">
+                                                                <label for="nama">Kontak</label>
+                                                                <input type="text" name="kontak" parsley-trigger="change" required
+                                                                    placeholder="masukan kontak yang bisa dihubungi" class="form-control" >
+                                                            </div>
                                                 <div class="form-group text-left">
                                                     <label for="password">Password</label>
                                                     <input id="password" type="password" placeholder="Password" required

@@ -48,20 +48,56 @@ class User extends CI_Controller
                 'label' => 'Nama',
                 'rules' => 'required|min_length[6]'
             ),
-
             array(
                 'field' => 'username',
                 'label' => 'Username',
                 'rules' => 'required|min_length[6]'
             ),
-
+            array(
+                'field' => 'nipy',
+                'label' => 'NIPY',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'nidn',
+                'label' => 'NIDN',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'disiplin_ilmu',
+                'label' => 'Disiplin Ilmu',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'pangkat_golongan',
+                'label' => 'Pangkat Golongan',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'jabatan_fungsional',
+                'label' => 'Jabatan Fungsional',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'jabatan_struktural',
+                'label' => 'Jabatan Struktural',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'kontak',
+                'label' => 'Kontak',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'username',
+                'label' => 'Username',
+                'rules' => 'required|min_length[6]'
+            ),
             array(
                 'field' => 'password',
                 'label' => 'Password',
                 'rules' => 'required|min_length[6]'
-
             ),
-
             array(
                 'field' => 'password2',
                 'label' => 'Confirm Password',
@@ -75,8 +111,15 @@ class User extends CI_Controller
             $data['username']	=	$this->input->post('username', true);
             $data['role']	    =	$this->input->post('role', true);
             $data['prodi']	    =	$this->input->post('prodi', true);
-            $pass           	=	$this->input->post('password', true);
-            $data['password']	=   password_hash($pass, PASSWORD_BCRYPT);
+            $data['nidn']	    =	$this->input->post('nidn', true);
+            $data['nipy']	    =	$this->input->post('nipy', true);
+            $data['disiplin_ilmu']	        =	$this->input->post('disiplin_ilmu', true);
+            $data['pangkat_golongan']	    =	$this->input->post('pangkat_golongan', true);
+            $data['jabatan_fungsional']	    =	$this->input->post('jabatan_fungsional', true);
+            $data['jabatan_struktural']	    =	$this->input->post('jabatan_struktural', true);
+            $data['kontak']	                =	$this->input->post('kontak', true);
+            $pass           	            =	$this->input->post('password', true);
+            $data['password']	            =   password_hash($pass, PASSWORD_BCRYPT);
 
             if ($this->M_user->insert($data)) {
                 $this->notifikasi->suksesAdd();
@@ -102,22 +145,54 @@ class User extends CI_Controller
                 array(
                     'field' => 'nama',
                     'label' => 'Nama',
-                    'rules' => 'required|min_length[6]'
+                    'rules' => 'required|min_length[4]'
                 ),
-    
                 array(
                     'field' => 'username',
                     'label' => 'Username',
                     'rules' => 'required|min_length[6]'
                 ),
-    
+                array(
+                    'field' => 'nipy',
+                    'label' => 'NIPY',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'nidn',
+                    'label' => 'NIDN',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'disiplin_ilmu',
+                    'label' => 'Disiplin Ilmu',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'pangkat_golongan',
+                    'label' => 'Pangkat Golongan',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'jabatan_fungsional',
+                    'label' => 'Jabatan Fungsional',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'jabatan_struktural',
+                    'label' => 'Jabatan Struktural',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'kontak',
+                    'label' => 'Kontak',
+                    'rules' => 'required'
+                ),
                 array(
                     'field' => 'password',
                     'label' => 'Password',
                     'rules' => 'required|min_length[6]'
     
                 ),
-    
                 array(
                     'field' => 'password2',
                     'label' => 'Confirm Password',
@@ -130,6 +205,13 @@ class User extends CI_Controller
                 $data['username']	=	$this->input->post('username', true);
                 $data['role']	    =	$this->input->post('role', true);
                 $data['prodi']	    =	$this->input->post('prodi', true);
+                $data['nidn']	    =	$this->input->post('nidn', true);
+                $data['nipy']	    =	$this->input->post('nipy', true);
+                $data['disiplin_ilmu']	        =	$this->input->post('disiplin_ilmu', true);
+                $data['pangkat_golongan']	    =	$this->input->post('pangkat_golongan', true);
+                $data['jabatan_fungsional']	    =	$this->input->post('jabatan_fungsional', true);
+                $data['jabatan_struktural']	    =	$this->input->post('jabatan_struktural', true);
+                $data['kontak']	                =	$this->input->post('kontak', true);
                 $pass           	=	$this->input->post('password', true);
                 $data['password']	=   password_hash($pass, PASSWORD_BCRYPT);
 
@@ -152,13 +234,47 @@ class User extends CI_Controller
                 array(
                     'field' => 'nama',
                     'label' => 'Nama',
-                    'rules' => 'required|min_length[6]'
+                    'rules' => 'required|min_length[4]'
                 ),
-    
                 array(
                     'field' => 'username',
                     'label' => 'Username',
                     'rules' => 'required|min_length[6]'
+                ),
+                array(
+                    'field' => 'nipy',
+                    'label' => 'NIPY',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'nidn',
+                    'label' => 'NIDN',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'disiplin_ilmu',
+                    'label' => 'Disiplin Ilmu',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'pangkat_golongan',
+                    'label' => 'Pangkat Golongan',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'jabatan_fungsional',
+                    'label' => 'Jabatan Fungsional',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'jabatan_struktural',
+                    'label' => 'Jabatan Struktural',
+                    'rules' => 'required'
+                ),
+                array(
+                    'field' => 'kontak',
+                    'label' => 'Kontak',
+                    'rules' => 'required'
                 )
             );
             $this->form_validation->set_rules($config_rules);
@@ -167,6 +283,13 @@ class User extends CI_Controller
                 $data['username']	=	$this->input->post('username', true);
                 $data['role']	    =	$this->input->post('role', true);
                 $data['prodi']	    =	$this->input->post('prodi', true);
+                $data['nidn']	    =	$this->input->post('nidn', true);
+                $data['nipy']	    =	$this->input->post('nipy', true);
+                $data['disiplin_ilmu']	        =	$this->input->post('disiplin_ilmu', true);
+                $data['pangkat_golongan']	    =	$this->input->post('pangkat_golongan', true);
+                $data['jabatan_fungsional']	    =	$this->input->post('jabatan_fungsional', true);
+                $data['jabatan_struktural']	    =	$this->input->post('jabatan_struktural', true);
+                $data['kontak']	                =	$this->input->post('kontak', true);
 
                 if ($this->M_user->update($data, $id)) {
                     $this->notifikasi->suksesEdit();

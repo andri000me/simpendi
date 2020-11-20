@@ -384,14 +384,14 @@ class Penelitian extends CI_Controller
     public function pengesahan()
     {
         $tahun = $this->M_tahun->all();
-        $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi1();
+        $anggotas = $this->M_anggota->anggota($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
-            'anggotas'  => $anggota,
+            'anggotas'  => $anggotas,
             'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
@@ -405,14 +405,14 @@ class Penelitian extends CI_Controller
     public function pengesahan2()
     {
         $tahun = $this->M_tahun->all();
-        $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi1();
+        $anggotas = $this->M_anggota->anggota($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
-            'anggotas'  => $anggota,
+            'anggotas'  => $anggotas,
             'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
