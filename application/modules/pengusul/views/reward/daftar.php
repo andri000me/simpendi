@@ -27,7 +27,7 @@
                                         <?php if ($datas != ''){
                                         foreach ($datas as $data) { $jurnal = $this->M_jurnal->getOne($data->jurnal_id);?>
                                         <tr>
-                                            <td><a href="<?php echo base_url('pengusul/Reward/download?file='.$jurnal->file);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
+                                            <td><a href="<?php echo base_url('pengusul/Reward/formulir?id='.$data->id);?>" class="btn btn-danger btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-pdf-o"></i></a>
                                             </td>
                                             <td><?=$jurnal->judul; ?></td>

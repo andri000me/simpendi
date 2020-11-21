@@ -25,6 +25,8 @@ class Penelitian extends CI_Controller
         $this->load->model('M_hibah');
         $this->load->model('M_anggota');
         $this->load->model('M_kontrol');
+        $this->load->model('M_pejabat');
+        $this->load->model('M_mahasiswa');
         $this->semester = $this->M_kontrol->all()->semester_aktif;
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
@@ -387,11 +389,13 @@ class Penelitian extends CI_Controller
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi1();
         $anggotas = $this->M_anggota->anggota($hibah->id);
+        $mahasiswa = $this->M_mahasiswa->mahasiswa($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggotas,
+            'mahasiswas'  => $mahasiswa,
             'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
@@ -408,11 +412,13 @@ class Penelitian extends CI_Controller
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi1();
         $anggotas = $this->M_anggota->anggota($hibah->id);
+        $mahasiswa = $this->M_mahasiswa->mahasiswa($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggotas,
+            'mahasiswas'  => $mahasiswa,
             'tahuns'    => $tahun,
             'page'	    => 'penelitian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';

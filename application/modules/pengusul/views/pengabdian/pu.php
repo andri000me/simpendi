@@ -95,6 +95,18 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
+                                                                <label class="col-2 col-form-label">Lokasi</label>
+                                                                <div class="col-10">
+                                                                    <input type="text" class="form-control"  name="lokasi" value="<?=$hibah->lokasi;?>">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-2 col-form-label">Waktu Pelaksanaan</label>
+                                                                <div class="col-10">
+                                                                    <input type="text" class="form-control" value="<?=$hibah->waktu;?>" name="waktu">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
                                                                 <label class="col-2 col-form-label">Luaran</label>
                                                                 <div class="col-10">
                                                                     <input type="text" class="form-control" placeholder="luaran" name="luaran" value="<?=$hibah->luaran;?>">

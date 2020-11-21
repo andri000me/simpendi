@@ -23,6 +23,7 @@ class Reward extends CI_Controller
         $this->load->model('M_jurnal');
         $this->load->model('M_user');
         $this->load->model('M_reward');
+        $this->load->model('M_pejabat');
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
@@ -34,12 +35,10 @@ class Reward extends CI_Controller
     }
     public function index()
     {
-        $jurnals = $this->M_jurnal->jurnal();
         $data = $this->M_reward->reward();
         $params = array(
             'title'	    => 'Reward',
             'datas'     => $data,
-            'jurnals'   => $jurnals,
             'page'	    => 'reward/daftar');
         $this->template($params);
     }
@@ -167,10 +166,22 @@ class Reward extends CI_Controller
         $this->index();
     }
 
-    public function download()
+    public function formulir()
     {
-        $nama_file = $this->input->get('file', true);
-        force_download('./upload/jurnal/'.$nama_file, NULL);
+        $id   = $this->input->get("id", true);
+        $data = $this->M_reward->getOne($id);
+        $jurnal = $this->M_jurnal->getOne($data->jurnal_id);
+        $params = array(
+            'title'	    => 'Formulir Reward',
+            'data'     => $data,
+            'jurnal'   => $jurnal,
+            'page'	    => 'reward/fu_reward');
+        require_once APPPATH.'../application/third_party/vendor/autoload.php';
+        $mpdf = new \Mpdf\Mpdf();
+        $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
+        $data = $this->load->view('reward/fu_reward', $params, TRUE);
+        $mpdf->WriteHTML($data);
+        $mpdf->Output();
     }
 
     public function template($params = array())

@@ -34,7 +34,7 @@ class Jurnal extends CI_Controller
     public function index()
     {
         $users = $this->M_user->anggotas($this->id);
-        $data = $this->M_jurnal->all();
+        $data = $this->M_jurnal->jurnal();
         $params = array(
             'title'	=> 'Jurnal',
             'datas' => $data,

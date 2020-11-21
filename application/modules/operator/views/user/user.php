@@ -202,16 +202,16 @@
                                                     <select class="custom-select" name="prodi" id="prodi">
                                                         <option selected > - Pilih Prodi / Unit - </option>
                                                         <option value="p3m">P3M</option>
-                                                        <option value="komputer">Komputer</option>
-                                                        <option value="farmasi">Farmasi</option>
-                                                        <option value="kebidanan">Kebidanan</option>
-                                                        <option value="akuntansi">Akuntansi</option>
-                                                        <option value="asp">ASP</option>
-                                                        <option value="informatika">Informatika</option>
-                                                        <option value="perhotelan">Perhotelan</option>
-                                                        <option value="mesin">Mesin</option>
-                                                        <option value="elektronika">Elektronika</option>
-                                                        <option value="dkv">DKV</option>
+                                                        <option value="DIII Teknik Komputer">Komputer</option>
+                                                        <option value="DIII Farmasi">Farmasi</option>
+                                                        <option value="DIII Kebidanan">Kebidanan</option>
+                                                        <option value="DIII Aakuntansi">Akuntansi</option>
+                                                        <option value="DIV Akuntansi Sektor Publik">ASP</option>
+                                                        <option value="DIV Teknik Informatika">Informatika</option>
+                                                        <option value="DIII Perhotelan">Perhotelan</option>
+                                                        <option value="DIII Teknik Mesin">Mesin</option>
+                                                        <option value="DIII Teknik Elektronika">Elektronika</option>
+                                                        <option value="DIII Desain Komunikasi Visual">DKV</option>
                                                     </select>
                                                 </div>
                                                             <div class="form-group text-left">

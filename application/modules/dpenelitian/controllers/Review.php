@@ -118,6 +118,10 @@ class Review extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             $data['status_p'] = $this->input->post('status', true);
+            $data['date_proposal'] = '';
+            if ($data['status_p'] == 5){ 
+                $data['date_proposal'] = $this->tanggal();
+            }
             $comment = $this->input->post('comment', true);
             $id    = $this->input->post('id', true);
 
@@ -173,6 +177,10 @@ class Review extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             $data['status_l'] = $this->input->post('status', true);
+            $data['date_laporan'] = '';
+            if ($data['status_l'] == 5){ 
+                $data['date_laporan'] = $this->tanggal();
+            }
             $comment = $this->input->post('comment', true);
             $id    = $this->input->post('id', true);
 
@@ -228,6 +236,10 @@ class Review extends CI_Controller
         $this->form_validation->set_rules($config_rules);
         if ($this->form_validation->run() == true) {
             $data['status_l'] = $this->input->post('status', true);
+            $data['date_laporan'] = '';
+            if ($data['status_l'] == 5){ 
+                $data['date_laporan'] = $this->tanggal();
+            }
             $comment = $this->input->post('comment', true);
             $id    = $this->input->post('id', true);
 
@@ -253,6 +265,54 @@ class Review extends CI_Controller
     {
         $nama_file = $this->input->get('file', true);
         force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+    }
+
+    public function tanggal()
+    {
+        $tanggal = '';
+        date_default_timezone_set('Asia/Jakarta');
+        switch (date('M')){
+            case 'Jan':
+                $tanggal = 'Januari '.date('Y');
+                break;
+            case 'Feb':
+                $tanggal = 'Februari '.date('Y');
+                break;
+            case 'Mar':
+                $tanggal = 'Maret '.date('Y');
+                break;
+            case 'Apr':
+                $tanggal = 'April '.date('Y');
+                break;
+            case 'May':
+                $tanggal = 'Mei '.date('Y');
+                break;
+            case 'Jun':
+                $tanggal = 'Juni '.date('Y');
+                break;
+            case 'Jul':
+                $tanggal = 'Juli '.date('Y');
+                break;
+            case 'Aug':
+                $tanggal = 'Agustus '.date('Y');
+                break;
+            case 'Sep':
+                $tanggal = 'September '.date('Y');
+                break;
+            case 'Oct':
+                $tanggal = 'Oktober '.date('Y');
+                break;
+            case 'Nov':
+                $tanggal = 'November '.date('Y');
+                break;
+            case 'Dec':
+                $tanggal = 'Desember '.date('Y');
+                break;
+            default:
+                $tanggal = date('M Y');
+                break;
+        }
+        return $tanggal;
     }
 
     public function template($params = array())

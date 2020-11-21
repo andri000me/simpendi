@@ -32,7 +32,7 @@
                                                 <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                 <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
                                                 <input type="file" class="dropify" data-height="90" name="laporan"/>
-                                                <button type="submit" class="btn btn-primary btn-rounded" style="width:100%;">Submit</button>
+                                                <button type="submit" class="btn btn-primary " style="width:100%;">Submit</button>
                                                 </form><?php } else {?>
                                                 <div class="card card-body"><strong>Sudah upload</strong></div><?php } ?>
                                             </td>

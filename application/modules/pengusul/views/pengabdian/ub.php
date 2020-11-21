@@ -76,6 +76,18 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
+                                                            <label class="col-2 col-form-label">Lokasi</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" placeholder="lokasi pelaksanaan pkm" name="lokasi">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-2 col-form-label">Waktu Pelaksanaan</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" placeholder="jangka waktu pelaksanaan pkm" name="waktu">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
                                                             <label class="col-2 col-form-label">Luaran</label>
                                                             <div class="col-10">
                                                                 <input type="text" class="form-control" placeholder="luaran" name="luaran">
@@ -93,7 +105,7 @@
                                                     <p class="text-muted m-b-30 font-14">
                                                         file word [doc | docx | rtf]
                                                     </p>
-                                                    <input type="file" class="dropify" data-height="300" name="proposal"/>
+                                                    <input type="file" class="dropify" data-height="250" name="proposal"/>
                                                     </div>
                                                 </form>
                                             </div>

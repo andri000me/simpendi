@@ -24,7 +24,9 @@ class Pengabdian extends CI_Controller
         $this->load->model('M_user');
         $this->load->model('M_hibah');
         $this->load->model('M_anggota');
+        $this->load->model('M_mahasiswa');
         $this->load->model('M_kontrol');
+        $this->load->model('M_pejabat');
         $this->semester = $this->M_kontrol->all()->semester_aktif;
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
@@ -81,6 +83,16 @@ class Pengabdian extends CI_Controller
                 'field' => 'luaran',
                 'label' => 'Luaran',
                 'rules' => 'required'
+            ),
+            array(
+                'field' => 'lokasi',
+                'label' => 'Lokasi',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'waktu',
+                'label' => 'Waktu',
+                'rules' => 'required'
             )
         );
 
@@ -103,6 +115,8 @@ class Pengabdian extends CI_Controller
                     $data['nominal']	=	$this->input->post('nominal', true);
                     $data['keilmuan']	=	$this->input->post('keilmuan', true);
                     $data['luaran']	    =	$this->input->post('luaran', true);
+                    $data['lokasi']	    =	$this->input->post('lokasi', true);
+                    $data['waktu']	    =	$this->input->post('waktu', true);
                     $data['status_p']	=	1;
 
                     if ($this->M_hibah->insert($data)) {
@@ -384,14 +398,16 @@ class Pengabdian extends CI_Controller
     public function pengesahan()
     {
         $tahun = $this->M_tahun->all();
-        $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi2();
+        $anggota = $this->M_anggota->anggota($hibah->id);
+        $mahasiswa = $this->M_mahasiswa->mahasiswa($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
+            'mahasiswas'  => $mahasiswa,
             'tahuns'    => $tahun,
             'page'	    => 'pengabdian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
@@ -405,14 +421,16 @@ class Pengabdian extends CI_Controller
     public function pengesahan2()
     {
         $tahun = $this->M_tahun->all();
-        $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi2();
+        $anggota = $this->M_anggota->anggota($hibah->id);
+        $mahasiswa = $this->M_mahasiswa->mahasiswa($hibah->id);
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
             'reviewers' => $reviewer,
             'anggotas'  => $anggota,
+            'mahasiswas'  => $mahasiswa,
             'tahuns'    => $tahun,
             'page'	    => 'pengabdian/pu');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
