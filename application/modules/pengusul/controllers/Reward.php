@@ -22,6 +22,7 @@ class Reward extends CI_Controller
         $this->load->model('M_Universal');
         $this->load->model('M_jurnal');
         $this->load->model('M_user');
+        $this->load->model('M_hadiah');
         $this->load->model('M_reward');
         $this->load->model('M_pejabat');
         $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
@@ -178,7 +179,9 @@ class Reward extends CI_Controller
             'page'	    => 'reward/fu_reward');
         require_once APPPATH.'../application/third_party/vendor/autoload.php';
         $mpdf = new \Mpdf\Mpdf();
-        $mpdf->AddPage("P","","","","","30","30","30","30","","","","","","","","","","","","A4");
+        $mpdf->SetHTMLHeader('
+            <img src="'.base_url('upload/kop.png').'" >');
+        $mpdf->AddPage("P","","","","","30","30","42","30","","","","","","","","","","","","A4");
         $data = $this->load->view('reward/fu_reward', $params, TRUE);
         $mpdf->WriteHTML($data);
         $mpdf->Output();

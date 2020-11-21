@@ -1,6 +1,6 @@
 <style type="text/css">
     td {
-        font-size : 16px;
+        font-size : 17px;
         font-family : 'times new roman';
         vertical-align: top;  
     }
@@ -128,8 +128,22 @@
 <td ></td>
 <td ></td>
 </tr>
+<tr>
+<td style="width: 236px;">&nbsp; &nbsp; - Rangking</td>
+<td style="width: 10px;">:</td>
+<td style="width: 443px;"><?=$data->kategori;?></td>
+</tr>
+<tr>
+<td style="width: 236px;">&nbsp; &nbsp; - Reward</td>
+<td style="width: 10px;">:</td>
+<td style="width: 443px;">Rp. <?=number_format($this->M_hadiah->getOne($data->kategori)->reward);?></td>
+</tr>
 </tbody>
 </table>
+<br>
+<P><em>Tanggal pengajuan : <?= date('d M Y'); ?></em></P>
+<P><em>*Untuk International Conference akan diberikan 50% (sebelah conference) dan 50% (setelah terbit prosiding)<br>
+*Syarat minimal author 1 dari PHB, jika semua dari PHB maka lebih baik</em></P>
 
 <table style="height: 142px; width: 680px;">
 <tbody>
@@ -161,7 +175,7 @@
 <tr style="height: 18px;">
 <td style="width: 296px; height: 18px;">NIPY. <?=$this->M_pejabat->kap3m()->nipy;?></td>
 <td style="width: 149px; height: 18px;">&nbsp;</td>
-<td style="width: 213px; height: 18px;">NIPY. <?=$this->M_user->ketua($jurnal->user_id)->nidn;?></td>
+<td style="width: 213px; height: 18px;">NIPY. <?=$this->M_user->ketua($jurnal->user_id)->nipy;?></td>
 </tr>
 </tbody>
 </table>
