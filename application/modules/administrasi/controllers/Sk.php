@@ -11,7 +11,7 @@ class Sk extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'operator')) {
+        if (empty($this->login) && ($this->role != 'administrasi')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -24,7 +24,7 @@ class Sk extends CI_Controller
         $this->load->model('M_Sk');
         $this->load->model('M_kontrol');
         $this->semester = $this->M_kontrol->all()->semester_aktif;
-        $data = $this->M_Universal->getOne(array("id_adm" => $this->id), "admin");
+        $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
         } else {
@@ -222,7 +222,7 @@ class Sk extends CI_Controller
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'operator') {
+            if ($this->role == 'administrasi') {
                 $params['menu']	= 'menu/menu';
             } else {
                 redirect('Login', 'refresh');

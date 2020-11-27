@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Penelitian extends CI_Controller
+class Pengabdian extends CI_Controller
 {
     public function __construct()
     {
@@ -11,7 +11,7 @@ class Penelitian extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'operator')) {
+        if (empty($this->login) && ($this->role != 'administrasi')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -25,7 +25,7 @@ class Penelitian extends CI_Controller
         $this->load->model('M_user');
         $this->load->model('M_kontrol');
         $this->semester = $this->M_kontrol->all()->semester_aktif;
-        $data = $this->M_Universal->getOne(array("id_adm" => $this->id), "admin");
+        $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
         } else {
@@ -36,12 +36,12 @@ class Penelitian extends CI_Controller
     public function index()
     {
         $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->usulanBaru();
+        $hibahs = $this->M_hibah->usulanBaru2();
         $params = array(
             'title'	    => 'Usulan Baru',
             'reviewers' => $reviewer,
             'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/ub');
+            'page'	    => 'pengabdian/ub');
         $this->template($params);
     }
 
@@ -118,19 +118,19 @@ class Penelitian extends CI_Controller
     public function pu()
     {
         $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->perbaikanUsulan();
+        $hibahs = $this->M_hibah->perbaikanUsulan2();
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'reviewers' => $reviewer,
             'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/pu');
+            'page'	    => 'pengabdian/pu');
         $this->template($params);
     }
 
     public function download()
     {
         $nama_file = $this->input->get('file', true);
-        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+        force_download('./upload/pengabdian/proposal/'.$nama_file, NULL);
     }
 
     public function set_kontrak()
@@ -171,31 +171,31 @@ class Penelitian extends CI_Controller
     public function lp()
     {
         $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->laporanPendahuluan();
+        $hibahs = $this->M_hibah->laporanPendahuluan2();
         $params = array(
             'title'	    => 'Laporan Pendahuluan',
             'reviewers' => $reviewer,
             'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/lp');
+            'page'	    => 'pengabdian/lp');
         $this->template($params);
     }
 
     public function pl()
     {
         $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->perbaikanLaporan();
+        $hibahs = $this->M_hibah->perbaikanLaporan2();
         $params = array(
             'title'	    => 'Perbaikan Laporan',
             'reviewers' => $reviewer,
             'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/pl');
+            'page'	    => 'pengabdian/pl');
         $this->template($params);
     }
 
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'operator') {
+            if ($this->role == 'administrasi') {
                 $params['menu']	= 'menu/menu';
             } else {
                 redirect('Login', 'refresh');

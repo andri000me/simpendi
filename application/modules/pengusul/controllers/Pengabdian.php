@@ -101,6 +101,7 @@ class Pengabdian extends CI_Controller
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/pengabdian/proposal/';
                 $config['allowed_types']	= 'doc|docx|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -220,6 +221,7 @@ class Pengabdian extends CI_Controller
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/pengabdian/proposal/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -279,6 +281,7 @@ class Pengabdian extends CI_Controller
             if ($_FILES['laporan']['size'] > 0) {
                 $config['upload_path']		= './upload/pengabdian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -348,6 +351,7 @@ class Pengabdian extends CI_Controller
             if ($_FILES['laporan']['size'] > 0) {
                 $config['upload_path']		= './upload/pengabdian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);

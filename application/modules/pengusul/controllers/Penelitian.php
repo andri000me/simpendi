@@ -91,6 +91,7 @@ class Penelitian extends CI_Controller
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/proposal/';
                 $config['allowed_types']	= 'doc|docx|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -208,6 +209,7 @@ class Penelitian extends CI_Controller
             if ($_FILES['proposal']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/proposal/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -267,6 +269,7 @@ class Penelitian extends CI_Controller
             if ($_FILES['laporan']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);
@@ -336,6 +339,7 @@ class Penelitian extends CI_Controller
             if ($_FILES['laporan']['size'] > 0) {
                 $config['upload_path']		= './upload/penelitian/laporan/';
                 $config['allowed_types']	= 'docx|doc|rtf';
+                $config['max_size']	        = 5000;
                 $config['detect_mime']	  = true;
                 $config['encrypt_name'] = true;
                 $this->load->library('upload', $config);

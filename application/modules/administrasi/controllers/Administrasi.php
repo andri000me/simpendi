@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Penelitian extends CI_Controller
+class Administrasi extends CI_Controller
 {
     public function __construct()
     {
@@ -11,7 +11,7 @@ class Penelitian extends CI_Controller
         $this->role	    = $this->session->userdata('log_in')['role'];
         $this->prodi	= $this->session->userdata('log_in')['prodi'];
         $this->username	= $this->session->userdata('log_in')['username'];
-        if (empty($this->login) && ($this->role != 'operator')) {
+        if (empty($this->login) && ($this->role != 'administrasi')) {
             redirect('Login', 'refresh');
         }
         $this->logout  = base_url('Login/logout');
@@ -20,182 +20,25 @@ class Penelitian extends CI_Controller
         $this->u5		= $this->uri->segment(5);
         $this->u6		= $this->uri->segment(6);
         $this->load->model('M_Universal');
-        $this->load->model('M_hibah');
-        $this->load->model('M_anggota');
-        $this->load->model('M_user');
-        $this->load->model('M_kontrol');
-        $this->semester = $this->M_kontrol->all()->semester_aktif;
-        $data = $this->M_Universal->getOne(array("id_adm" => $this->id), "admin");
+        $data = $this->M_Universal->getOne(array("id_adm" => 1), "admin");
         if (file_exists('upload/profil/'.$data->foto_adm)) {
             $this->foto = base_url('upload/profil/'.$data->foto_adm);
         } else {
             $this->foto = base_url('assets/adminto/assets/images/users/avatar-1.jpg');
         }
-        $this->load->helper(array('file', 'resize', 'download'));
+        $this->load->helper(array('file', 'resize'));
     }
     public function index()
     {
-        $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->usulanBaru();
         $params = array(
-            'title'	    => 'Usulan Baru',
-            'reviewers' => $reviewer,
-            'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/ub');
+            'title'	=> 'Dashboard',
+            'page'	=> 'dashbord');
         $this->template($params);
     }
-
-    public function set_reviewer1()
-    {
-        $config_rules = array(
-            array(
-                'field' => 'reviewer1',
-                'label' => 'Reviewer 1',
-                'rules' => 'required'
-            ),
-            array(
-                'field' => 'id',
-                'label' => 'id',
-                'rules' => 'required'
-            )
-        );
-        $this->form_validation->set_rules($config_rules);
-        if ($this->form_validation->run() == true) {
-            $data['reviewer1_id']	    =	$this->input->post('reviewer1', true);
-            $id                         = $this->input->post('id', true);
-
-            if ($this->M_hibah->update($data, $id)) {
-                $this->notifikasi->suksesEdit();
-
-                $this->index();
-            } else {
-                $this->notifikasi->gagalEdit();
-
-                $this->index();
-            }
-        } else {
-            $this->notifikasi->valdasiError(validation_errors());
-
-            $this->index();
-        }
-    }
-
-    public function set_reviewer2()
-    {
-        $config_rules = array(
-            array(
-                'field' => 'reviewer2',
-                'label' => 'Reviewer 2',
-                'rules' => 'required'
-            ),
-            array(
-                'field' => 'id',
-                'label' => 'id',
-                'rules' => 'required'
-            )
-        );
-        $this->form_validation->set_rules($config_rules);
-        if ($this->form_validation->run() == true) {
-            $data['reviewer2_id']	    = $this->input->post('reviewer2', true);
-            $id                         = $this->input->post('id', true);
-
-            if ($this->M_hibah->update($data, $id)) {
-                $this->notifikasi->suksesEdit();
-
-                $this->index();
-            } else {
-                $this->notifikasi->gagalEdit();
-
-                $this->index();
-            }
-        } else {
-            $this->notifikasi->valdasiError(validation_errors());
-
-            $this->index();
-        }
-    }
-
-    public function pu()
-    {
-        $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->perbaikanUsulan();
-        $params = array(
-            'title'	    => 'Perbaikan Usulan',
-            'reviewers' => $reviewer,
-            'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/pu');
-        $this->template($params);
-    }
-
-    public function download()
-    {
-        $nama_file = $this->input->get('file', true);
-        force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
-    }
-
-    public function set_kontrak()
-    {
-        $config_rules = array(
-            array(
-                'field' => 'kontrak',
-                'label' => 'kontrak',
-                'rules' => 'required'
-            ),
-            array(
-                'field' => 'id',
-                'label' => 'id',
-                'rules' => 'required'
-            )
-        );
-        $this->form_validation->set_rules($config_rules);
-        if ($this->form_validation->run() == true) {
-            $data['kontrak']	    = $this->input->post('kontrak', true);
-            $id                         = $this->input->post('id', true);
-
-            if ($this->M_hibah->update($data, $id)) {
-                $this->notifikasi->suksesEdit();
-
-                $this->pu();
-            } else {
-                $this->notifikasi->gagalEdit();
-
-                $this->pu();
-            }
-        } else {
-            $this->notifikasi->valdasiError(validation_errors());
-
-            $this->pu();
-        }
-    }
-
-    public function lp()
-    {
-        $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->laporanPendahuluan();
-        $params = array(
-            'title'	    => 'Laporan Pendahuluan',
-            'reviewers' => $reviewer,
-            'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/lp');
-        $this->template($params);
-    }
-
-    public function pl()
-    {
-        $reviewer = $this->M_user->reviewers();
-        $hibahs = $this->M_hibah->perbaikanLaporan();
-        $params = array(
-            'title'	    => 'Perbaikan Laporan',
-            'reviewers' => $reviewer,
-            'hibahs'    => $hibahs,
-            'page'	    => 'penelitian/pl');
-        $this->template($params);
-    }
-
     public function template($params = array())
     {
         if (count( (array)$params) > 0) {
-            if ($this->role == 'operator') {
+            if ($this->role == 'administrasi') {
                 $params['menu']	= 'menu/menu';
             } else {
                 redirect('Login', 'refresh');

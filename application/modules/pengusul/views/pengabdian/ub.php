@@ -46,9 +46,6 @@
                                                                     <option value="<?=$anggota->id;?>"><?=$anggota->name;?></option>
                                                                     <?php } ?>
                                                                 </optgroup>
-                                                                <optgroup label="Mahasiswa">
-                                                                    <option value=""></option>
-                                                                </optgroup>
                                                             </select>
                                                             </div>
                                                         </div>
