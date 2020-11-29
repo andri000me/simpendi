@@ -10,8 +10,9 @@
 
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
+                                        <?php if ($hibah != ''){?>
                                         <tr>
-                                            <th>Upload laporan</th>
+                                            <th><?php if($hibah->status_l == 5) {echo 'Lembar Pengesahan';} else {echo 'Upload laporan';}?></th>
                                             <th>Judul</th>
                                             <th>Ketua</th>
                                             <th>Anggota</th>
@@ -24,7 +25,6 @@
 
 
                                         <tbody>
-                                        <?php if ($hibah != ''){?>
                                         <tr>
                                         
                                             <td><?php if($hibah->status_l == '' || $hibah->status_l == 0 ) {?>
@@ -36,7 +36,8 @@
                                                 </form><?php } else {?>
                                                 <div class="card card-body"><strong>Sudah upload</strong></div><?php } ?>
                                             </td>
-                                            <td><?=$hibah->judul; ?></td>
+                                            <td><?php if($hibah->status_l == 5){ ?> <a href="<?php echo base_url('pengusul/Pengabdian/download2?file='.$hibah->laporan);?>"><?=$hibah->judul; ?></a>
+                                            <?php } else { echo $hibah->judul;}?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>
                                             <td><?php
                                             foreach ($this->M_anggota->anggota($hibah->id) as $anggota){

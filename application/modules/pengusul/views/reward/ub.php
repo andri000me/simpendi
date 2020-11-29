@@ -69,6 +69,12 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
+                                                            <label class="col-2 col-form-label">URL SJR / Laman SINTA</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" name="url_laman">
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
                                                             <label class="col-2 col-form-label"></label>
                                                             <div class="col-10">
                                                             <button type="submit" class="btn btn-primary">Submit</button>

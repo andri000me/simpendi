@@ -153,7 +153,8 @@ class Penelitian extends CI_Controller
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi1();
-        if ($hibah != ''){if ($hibah->status_p == 2 || $hibah->status_p == 4){$this->notifikasi->comment($hibah->comment);}}
+        if ($hibah != ''){if ($hibah->status_p == 2 || $hibah->status_p == 4){$this->notifikasi->comment($hibah->comment);}
+                            else if ($hibah->status_p == 5){$this->notifikasi->instruksi("Silahkan Cetak dan Jilid Proposal untuk dikumpulkan di P3M");}}
         $params = array(
             'title'	    => 'Perbaikan Usulan',
             'hibah'    => $hibah,
@@ -313,7 +314,8 @@ class Penelitian extends CI_Controller
         $anggota = $this->M_user->anggotas($this->id);
         $reviewer = $this->M_user->reviewers();
         $hibah = $this->M_hibah->revisi_laporan1();
-        if ($hibah != ''){if ($hibah->status_l == 2){$this->notifikasi->comment($hibah->comment);}}
+        if ($hibah != ''){if ($hibah->status_l == 2){$this->notifikasi->comment($hibah->comment);}
+                            else if ($hibah->status_l == 5){$this->notifikasi->instruksi("Silahkan Cetak dan Jilid Laporan untuk dikumpulkan di P3M");}}
         $params = array(
             'title'	    => 'Perbaikan Laporan',
             'hibah'    => $hibah,
@@ -385,6 +387,12 @@ class Penelitian extends CI_Controller
     {
         $nama_file = $this->input->get('file', true);
         force_download('./upload/penelitian/proposal/'.$nama_file, NULL);
+    }
+
+    public function download2()
+    {
+        $nama_file = $this->input->get('file', true);
+        force_download('./upload/penelitian/laporan/'.$nama_file, NULL);
     }
 
     public function pengesahan()

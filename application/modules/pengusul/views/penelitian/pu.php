@@ -28,10 +28,15 @@
                                         <?php if ($hibah != ''){?>
                                         <tr>
                                         
-                                            <td><a href="<?php echo base_url('pengusul/Penelitian/download?file='.$hibah->proposal_review1);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                            <td><?php if($hibah->status_p != 5) { ?>
+                                                <a href="<?php echo base_url('pengusul/Penelitian/download?file='.$hibah->proposal_review1);?>" class="btn btn-info btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-word-o"> 1</i></a>
                                                 <a href="<?php echo base_url('pengusul/Penelitian/download?file='.$hibah->proposal_review2);?>" class="btn btn-info btn-rounded waves-effect waves-light">
                                                 <i class="fa fa-file-word-o"> 2</i></a>
+                                                <?php } else { ?>
+                                                <a href="<?php echo base_url('pengusul/Penelitian/download?file='.$hibah->proposal);?>" class="btn btn-info btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-file-word-o"></i></a>
+                                                <?php } ?>
                                             </td>
                                             <td><?=$hibah->judul; ?></td>
                                             <td><?= $this->M_user->ketua($hibah->user_id)->name;?></td>

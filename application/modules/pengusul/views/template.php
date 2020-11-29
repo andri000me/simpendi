@@ -154,7 +154,7 @@
                             </ul>
                         </li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-share-alt"></i><span>Luaran </span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-share-alt"></i><span>Publikasi </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?php echo base_url('pengusul/Jurnal/');?>">Jurnal</a></li>
                                 <li><a href="<?php echo base_url('pengusul/Pemakalah');?>">Pemakalah Forum Ilmiah</a></li>

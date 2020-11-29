@@ -11,12 +11,12 @@
                                     <table id="datatable-buttons" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                         <thead>
                                         <tr>
-                                            <th>Unduh</th>
+                                            <th>Unduh Formulir</th>
                                             <th>Judul</th>
                                             <th>Nama Jurnal</th>
                                             <th>Penerbit</th>
                                             <th>Tanggal diterbitkan</th>
-                                            <th>Url</th>
+                                            <th>Url Jurnal</th>
                                             <th>Kategori</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -34,8 +34,8 @@
                                             <td><?=$jurnal->nama; ?></td>
                                             <td><?=$data->penerbit; ?></td>
                                             <td><?=$data->tanggal; ?></td>
-                                            <td><?=$jurnal->url; ?></td>
-                                            <td><?=$data->kategori; ?></td>
+                                            <td><a href="<?=$jurnal->url; ?>"><?=$jurnal->url; ?></a></td>
+                                            <td><a href="<?=$data->url_laman; ?>"><?=$data->kategori; ?></a></td>
                                             <td>
                                                 <a href="#edit-modal-<?php echo $data->id; ?>" class="btn btn-warning btn-rounded waves-effect waves-light" 
                                                     data-animation="door" data-plugin="custommodal" data-overlaySpeed="100" data-overlayColor="#36404a">
@@ -106,6 +106,12 @@
                                                                     <option value="S3">S3</option>
                                                                     <option value="S4">S4</option>
                                                                 </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-2 col-form-label">URL SJR / Laman SINTA</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" value="<?=$data->url_laman;?>" name="url_laman">
                                                             </div>
                                                         </div>
                                                             <div class="form-group text-right m-b-0">

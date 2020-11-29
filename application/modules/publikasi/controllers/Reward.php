@@ -81,6 +81,11 @@ class Reward extends CI_Controller
                 'field' => 'kategori',
                 'label' => 'Kategori',
                 'rules' => 'required'
+            ),
+            array(
+                'field' => 'url_laman',
+                'label' => 'URL Laman',
+                'rules' => 'required'
             )
         );
 
@@ -91,6 +96,7 @@ class Reward extends CI_Controller
             $data['penerbit']	=	$this->input->post('penerbit', true);
             $data['tanggal']	=	$this->input->post('tanggal', true);
             $data['kategori']	=	$this->input->post('kategori', true);
+            $data['url_laman']	=	$this->input->post('url_laman', true);
 
             if ($this->M_reward->insert($data)) {
                         
@@ -138,6 +144,11 @@ class Reward extends CI_Controller
                 'field' => 'kategori',
                 'label' => 'Kategori',
                 'rules' => 'required'
+            ),
+            array(
+                'field' => 'url_laman',
+                'label' => 'URL Laman',
+                'rules' => 'required'
             )
         );
 
@@ -148,6 +159,7 @@ class Reward extends CI_Controller
             $data['penerbit']	=	$this->input->post('penerbit', true);
             $data['tanggal']	=	$this->input->post('tanggal', true);
             $data['kategori']	=	$this->input->post('kategori', true);
+            $data['url_laman']	=	$this->input->post('url_laman', true);
             $id                 =   $this->input->post('id', true);
 
             if ($this->M_reward->update($data, $id)) {
