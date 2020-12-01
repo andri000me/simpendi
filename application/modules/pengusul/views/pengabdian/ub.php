@@ -50,6 +50,20 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
+                                                            <label class="col-2 col-form-label">Mahasiswa 1</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" placeholder="nama mahasiswa" name="mahasiswa1">
+                                                                <span class="help-block"><small>*Isi jika pkm melibatkan mahasiswa</small></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
+                                                            <label class="col-2 col-form-label">Mahasiswa 2</label>
+                                                            <div class="col-10">
+                                                                <input type="text" class="form-control" placeholder="nama mahasiswa" name="mahasiswa2">
+                                                                <span class="help-block"><small>*Isi jika pkm melibatkan mahasiswa.</small></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group row">
                                                             <label class="col-2 col-form-label">Judul</label>
                                                             <div class="col-10">
                                                                 <input type="text" class="form-control" placeholder="Judul" name="judul">

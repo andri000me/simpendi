@@ -58,16 +58,34 @@
                                                     </button>
                                                     <h4 class="custom-modal-title">Review</h4>
                                                     <div class="custom-modal-text">
-                                                        <form method="post" action="<?php echo base_url('dpengabdian/Review/penilaian');?>" data-parsley-validate novalidate enctype="multipart/form-data">
+                                                        <?php if(($hibah->reviewer1_id <= 0) || ($hibah->reviewer2_id <= 0)) { 
+                                                            $function = 'set_reviewer';} else {$function = 'penilaian';} ?>
+                                                        <form method="post" action="<?php echo base_url('dpengabdian/Review/'.$function);?>" data-parsley-validate novalidate enctype="multipart/form-data">
                                                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" 
                                                             value="<?=$this->security->get_csrf_hash();?>" style="display: none">
                                                             <input type="hidden" name="id" value="<?php echo $hibah->id; ?>">
-                                                            
+                                                            <?php if(($hibah->reviewer1_id <= 0) || ($hibah->reviewer2_id <= 0)) { ?>
+                                                            <div class="form-group text-left">
+                                                                <label for="prodi">Pilih Reviewer</label>
+                                                                <select class="custom-select" name="reviewer1" >
+                                                                    <option value="" selected > - Pilih Reviewer 1 - </option>
+                                                                    <?php foreach ($reviewers as $reviewer) {?>
+                                                                    <option value="<?= $reviewer->id;?>"><?= $reviewer->name;?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                                <select class="custom-select" name="reviewer2" >
+                                                                    <option value="" selected > - Pilih Reviewer 2 - </option>
+                                                                    <?php foreach ($reviewers as $reviewer) {?>
+                                                                    <option value="<?= $reviewer->id;?>"><?= $reviewer->name;?></option>
+                                                                    <?php } ?>
+                                                                </select>
+                                                            </div>
+                                                            <?php } else { ?>
                                                             <label for="comment" class="col-sm-12 col-form-label text-left"><strong>Comment</strong></label>
                                                             <div class="form-group row">
                                                                 <textarea class="col-sm-12 float-left" name="comment" rows="6"></textarea>
                                                             </div>
-
+                                                            <?php } ?>
                                                             <div class="form-group text-right m-b-0">
                                                                 <button class="btn btn-primary btn-rounded waves-effect waves-light" type="submit">
                                                                     Submit

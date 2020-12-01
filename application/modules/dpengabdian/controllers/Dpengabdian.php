@@ -41,11 +41,11 @@ class Dpengabdian extends CI_Controller
             if ($this->role == 'dpengabdian') {
                 $params['menu']	= 'menu/menu';
             } else {
-                redirect('warning', 'refresh');
+                redirect('Login', 'refresh');
             }
             $this->load->view('template', $params);
         } else {
-            redirect('warning', 'refresh');
+            redirect('Login', 'refresh');
         }
     }
     public function profil()

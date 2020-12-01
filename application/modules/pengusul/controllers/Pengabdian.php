@@ -118,6 +118,8 @@ class Pengabdian extends CI_Controller
                     $data['luaran']	    =	$this->input->post('luaran', true);
                     $data['lokasi']	    =	$this->input->post('lokasi', true);
                     $data['waktu']	    =	$this->input->post('waktu', true);
+                    $data['mahasiswa1']	    =	$this->input->post('mahasiswa1', true);
+                    $data['mahasiswa2']	    =	$this->input->post('mahasiswa2', true);
                     $data['status_p']	=	1;
 
                     if ($this->M_hibah->insert($data)) {
@@ -233,6 +235,8 @@ class Pengabdian extends CI_Controller
                     $data['judul']	    =	$this->input->post('judul', true);
                     $data['keilmuan']	=	$this->input->post('keilmuan', true);
                     $data['luaran']	    =	$this->input->post('luaran', true);
+                    $data['mahasiswa1']	=	$this->input->post('mahasiswa1', true);
+                    $data['mahasiswa2']	=	$this->input->post('mahasiswa2', true);
                     $data['status_p']	=	3;
 
                     $fileSblumnya = $this->M_hibah->revisi2();

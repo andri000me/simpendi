@@ -130,7 +130,7 @@
                     <ul>
                         <li class="text-muted menu-title">Navigation</li>
                         <li>
-                            <a href="<?php echo base_url('operator');?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
+                            <a href="<?php echo base_url('dpenelitian');?>" class="waves-effect"><i class="mdi mdi-view-dashboard"></i> <span> Dashboard </span> </a>
                         </li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="fa fa-spin fa-spinner"></i><span>Review </span> <span class="menu-arrow"></span></a>

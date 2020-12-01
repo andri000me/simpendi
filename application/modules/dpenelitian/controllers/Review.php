@@ -47,6 +47,47 @@ class Review extends CI_Controller
         $this->template($params);
     }
 
+    public function set_reviewer()
+    {
+        $config_rules = array(
+            array(
+                'field' => 'reviewer1',
+                'label' => 'Reviewer 1',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'reviewer2',
+                'label' => 'Reviewer 2',
+                'rules' => 'required'
+            ),
+            array(
+                'field' => 'id',
+                'label' => 'id',
+                'rules' => 'required'
+            )
+        );
+        $this->form_validation->set_rules($config_rules);
+        if ($this->form_validation->run() == true) {
+            $data['reviewer1_id']	    =	$this->input->post('reviewer1', true);
+            $data['reviewer2_id']	    =	$this->input->post('reviewer2', true);
+            $id                         = $this->input->post('id', true);
+
+            if ($this->M_hibah->update($data, $id)) {
+                $this->notifikasi->suksesEdit();
+
+                $this->index();
+            } else {
+                $this->notifikasi->gagalEdit();
+
+                $this->index();
+            }
+        } else {
+            $this->notifikasi->valdasiError(validation_errors());
+
+            $this->index();
+        }
+    }
+
     public function penilaian()
     {
         $config_rules = array(
@@ -321,11 +362,11 @@ class Review extends CI_Controller
             if ($this->role == 'dpenelitian') {
                 $params['menu']	= 'menu/menu';
             } else {
-                redirect('warning', 'refresh');
+                redirect('Login', 'refresh');
             }
             $this->load->view('template', $params);
         } else {
-            redirect('warning', 'refresh');
+            redirect('Login', 'refresh');
         }
     }
 }
